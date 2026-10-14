@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones Polinomiales y Racionales | Precálculo Académico</title>
+    <!-- Tailwind CSS CDN para un diseño moderno y responsive -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- KaTeX para renderizado matemático profesional -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        .smooth-scroll { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 smooth-scroll">
+
+    <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="bg-indigo-600 text-white font-bold p-2 rounded-lg text-sm">f(x)</span>
+                <h1 class="font-bold text-lg text-slate-900 hidden sm:block">Precálculo: Funciones Polinomiales y Racionales</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-600">
+                <a href="#fundamentos" class="hover:text-indigo-600 transition">1. Fundamentos</a>
+                <a href="#interactividad" class="hover:text-indigo-600 transition">2. Simulador Interactivo</a>
+                <a href="#ejercicios" class="hover:text-indigo-600 transition">3. Ejercicios Prácticos</a>
+                <a href="#conclusiones" class="hover:text-indigo-600 transition">4. Conclusiones y Bibliografía</a>
+            </nav>
+            <div>
+                <!-- Botón funcional para regresar a Main -->
+                <a href="/index.html" id="btn-main" class="inline-flex items-center px-4 py-2 bg-slate-800 hover:bg-slate-900 text-white text-sm font-medium rounded-lg transition shadow-sm">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    Volver a Main
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+        <!-- SECCIÓN 1: INTRODUCCIÓN Y FUNDAMENTOS -->
+        <section id="fundamentos" class="space-y-10">
+            <div class="bg-gradient-to-r from-indigo-900 to-slate-900 text-white p-8 rounded-2xl shadow-lg">
+                <span class="text-indigo-400 font-semibold tracking-wide text-xs uppercase">Sección 01</span>
+                <h2 class="text-3xl font-extrabold mt-1 mb-4">Introducción y Fundamentos Teóricos</h2>
+                <p class="text-slate-300 max-w-4xl text-lg leading-relaxed">
+                    Comprender las características algebraicas y gráficas de las funciones polinomiales y racionales es esencial en el precálculo. Este módulo aborda el estudio riguroso de sus dominios, ceros, multiplicidades, asíntotas y comportamiento asintótico mediante herramientas visuales y analíticas.
+                </p>
+            </div>
+
+            <!-- Subsección A: Funciones Polinomiales -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <span class="text-indigo-600 font-semibold text-sm">A. Análisis Estructural</span>
+                    <h3 class="text-2xl font-bold text-slate-900">Funciones Polinomiales</h3>
+                </div>
+                <p class="text-slate-600 leading-relaxed">
+                    Una función polinomial es aquella que puede expresarse como una suma finita de potencias enteras no negativas de la variable independiente, multiplicadas por coeficientes constantes. Su forma general es:
+                </p>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center font-mono text-indigo-700 text-lg">
+                    $$f(x) = a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0$$
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <ul class="space-y-2">
+                            <li><strong>\\(a_n, a_{n-1}, \dots, a_0\\):</strong> Coeficientes reales.</li>
+                            <li><strong>\\(a_n \neq 0\\):</strong> Coeficiente principal.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <ul class="space-y-2">
+                            <li><strong>\\(n\\):</strong> Grado del polinomio (entero no negativo).</li>
+                            <li><strong>Dominio:</strong> El conjunto de los números reales \\(\mathbb{R}\\).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Clasificación según el grado -->
+                <h4 class="text-lg font-bold text-slate-800 pt-4">Clasificación según el Grado</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="p-5 rounded-xl border border-slate-200 bg-white shadow-sm space-y-2">
+                        <span class="text-xs font-semibold px-2 py-1 bg-indigo-50 text-indigo-600 rounded">Grado 0</span>
+                        <h5 class="font-bold text-slate-900">Constante</h5>
+                        <p class="text-sm font-mono text-indigo-700">$$f(x) = c$$</p>
+                        <p class="text-xs text-slate-500">Ejemplo: \\(f(x) = 5\\). Recta horizontal.</p>
+                    </div>
+                    <div class="p-5 rounded-xl border border-slate-200 bg-white shadow-sm space-y-2">
+                        <span class="text-xs font-semibold px-2 py-1 bg-indigo-50 text-indigo-600 rounded">Grado 1</span>
+                        <h5 class="font-bold text-slate-900">Lineal</h5>
+                        <p class="text-sm font-mono text-indigo-700">$$f(x) = mx + b$$</p>
+                        <p class="text-xs text-slate-500">Ejemplo: \\(f(x) = 2x - 3\\). Pendiente \\(m\\).</p>
+                    </div>
+                    <div class="p-5 rounded-xl border border-slate-200 bg-white shadow-sm space-y-2">
+                        <span class="text-xs font-semibold px-2 py-1 bg-indigo-50 text-indigo-600 rounded">Grado 2</span>
+                        <h5 class="font-bold text-slate-900">Cuadrática</h5>
+                        <p class="text-sm font-mono text-indigo-700">$$f(x) = ax^2 + bx + c$$</p>
+                        <p class="text-xs text-slate-500">Ejemplo: \\(f(x) = x^2 - 4x + 3\\). Parábola.</p>
+                    </div>
+                    <div class="p-5 rounded-xl border border-slate-200 bg-white shadow-sm space-y-2">
+                        <span class="text-xs font-semibold px-2 py-1 bg-indigo-50 text-indigo-600 rounded">Grado 3</span>
+                        <h5 class="font-bold text-slate-900">Cúbica</h5>
+                        <p class="text-sm font-mono text-indigo-700">$$f(x) = ax^3 + bx^2 + cx + d$$</p>
+                        <p class="text-xs text-slate-500">Ejemplo: \\(f(x) = x^3 - 3x\\).</p>
+                    </div>
+                    <div class="p-5 rounded-xl border border-slate-200 bg-white shadow-sm space-y-2 sm:col-span-2 lg:col-span-2">
+                        <span class="text-xs font-semibold px-2 py-1 bg-indigo-50 text-indigo-600 rounded">Grado Superior</span>
+                        <h5 class="font-bold text-slate-900">Grado \\(n \geq 4\\)</h5>
+                        <p class="text-sm font-mono text-indigo-700">$$f(x) = a_n x^n + \dots + a_0$$</p>
+                        <p class="text-xs text-slate-500">Ejemplo: \\(f(x) = x^4 - 5x^2 + 4\\). Múltiples inflexiones y simetrías.</p>
+                    </div>
+                </div>
+
+                <!-- Ceros y Multiplicidad -->
+                <div class="bg-indigo-50/50 p-6 rounded-xl border border-indigo-100 space-y-4">
+                    <h4 class="text-lg font-bold text-slate-900">Ceros, Multiplicidad y Teoremas Fundamentales</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Analicemos la función factorizada \\(f(x) = (x-2)^2 (x+1)\\). Sus ceros son \\(x = 2\\) (con multiplicidad 2) y \\(x = -1\\) (con multiplicidad 1).
+                    </p>
+                    <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
+                        <li><strong>Multiplicidad impar (ej. \\(x = -1\\)):</strong> La gráfica cruza el eje \\(x\\) cambiando de signo.</li>
+                        <li><strong>Multiplicidad par (ej. \\(x = 2\\)):</strong> La gráfica toca el eje \\(x\\) y rebotan sin cambiar de signo.</li>
+                        <li><strong>Teorema del Factor:</strong> \\(f(c) = 0 \iff (x - c)\\) es factor de \\(f(x)\\).</li>
+                        <li><strong>Teorema del Resto:</strong> El residuo de dividir \\(f(x)\\) entre \\(x - c\\) es \\(f(c)\\).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Subsección B: Funciones Racionales -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <span class="text-indigo-600 font-semibold text-sm">B. Cocientes Polinomiales</span>
+                    <h3 class="text-2xl font-bold text-slate-900">Funciones Racionales</h3>
+                </div>
+                <p class="text-slate-600 leading-relaxed">
+                    Una función racional es el cociente de dos polinomios:
+                </p>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center font-mono text-indigo-700 text-lg">
+                    $$f(x) = \frac{P(x)}{Q(x)}, \quad Q(x) \neq 0$$
+                </div>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    Su dominio excluye todos los valores reales que anulan el denominador \\(Q(x)\\).
+                </p>
+
+                <!-- Ejemplos Fundamentales Racionales -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                        <h5 class="font-bold text-slate-900">1. Básica</h5>
+                        <p class="font-mono text-indigo-700">$$f(x) = \frac{1}{x}$$</p>
+                        <p class="text-xs text-slate-600">Dominio: \\(\mathbb{R} \setminus \{0\}\\). Asíntotas \\(x=0, y=0\\).</p>
+                    </div>
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                        <h5 class="font-bold text-slate-900">2. Asíntotas Vertical y Horizontal</h5>
+                        <p class="font-mono text-indigo-700">$$f(x) = \frac{2x+1}{x-3}$$</p>
+                        <p class="text-xs text-slate-600">AV: \\(x=3\\). AH: \\(y=2\\).</p>
+                    </div>
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                        <h5 class="font-bold text-slate-900">3. Asíntota Oblicua</h5>
+                        <p class="font-mono text-indigo-700">$$f(x) = \frac{x^2+1}{x-1}$$</p>
+                        <p class="text-xs text-slate-600">Grado numerador > denominador. AO: \\(y = x + 1\\).</p>
+                    </div>
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                        <h5 class="font-bold text-slate-900">4. Discontinuidad Removible</h5>
+                        <p class="font-mono text-indigo-700">$$f(x) = \frac{x^2-1}{x-1}$$</p>
+                        <p class="text-xs text-slate-600">Equivale a \\(x+1\\) para \\(x \neq 1\\). Presenta un hueco en \\((1,2)\\).</p>
+                    </div>
+                </div>
+
+                <!-- Criterios de Asíntotas -->
+                <div class="border-t border-slate-100 pt-6 space-y-4">
+                    <h4 class="text-lg font-bold text-slate-900">Análisis de Asíntotas Horizontales</h4>
+                    <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                        <li><strong>Grado Numerador < Grado Denominador:</strong> Asíntota horizontal \\(y = 0\\).</li>
+                        <li><strong>Grado Numerador = Grado Denominador:</strong> Asíntota horizontal en el cociente de coeficientes principales \\(y = \frac{a_n}{b_m}\\).</li>
+                        <li><strong>Grado Numerador > Grado Denominador (por 1):</strong> Existe asíntota oblicua \\(y = mx + b\\) obtenida mediante división polinómica.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: METODOLOGÍA COMPARADA E INTERACTIVIDAD -->
+        <section id="interactividad" class="space-y-10">
+            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white p-8 rounded-2xl shadow-lg">
+                <span class="text-indigo-400 font-semibold tracking-wide text-xs uppercase">Sección 02</span>
+                <h2 class="text-3xl font-extrabold mt-1 mb-4">Metodología Comparada e Interactividad</h2>
+                <p class="text-slate-300 max-w-4xl text-lg leading-relaxed">
+                    Contrasta las propiedades estructurales de ambos tipos de funciones y experimenta directamente con el simulador interactivo gráfico impulsado por JavaScript y HTML5 Canvas.
+                </p>
+            </div>
+
+            <!-- Cuadro Comparativo -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+                <h3 class="text-2xl font-bold text-slate-900">Cuadro Comparativo: Polinomiales vs. Racionales</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700">
+                                <th class="p-3 border border-slate-200">Criterio</th>
+                                <th class="p-3 border border-slate-200">Funciones Polinomiales</th>
+                                <th class="p-3 border border-slate-200">Funciones Racionales</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-600">
+                            <tr>
+                                <td class="p-3 border border-slate-200 font-semibold">Forma general</td>
+                                <td class="p-3 border border-slate-200">Suma finita de potencias enteras no negativas.</td>
+                                <td class="p-3 border border-slate-200">Cociente de dos polinomios \\(P(x)/Q(x)\\).</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="p-3 border border-slate-200 font-semibold">Dominio real</td>
+                                <td class="p-3 border border-slate-200">Siempre \\(\mathbb{R}\\).</td>
+                                <td class="p-3 border border-slate-200">Excluye los ceros del denominador original.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 border border-slate-200 font-semibold">Continuidad</td>
+                                <td class="p-3 border border-slate-200">Continuas en todo \\(\mathbb{R}\\).</td>
+                                <td class="p-3 border border-slate-200">Continuas en cada intervalo de su dominio.</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="p-3 border border-slate-200 font-semibold">Gráfica</td>
+                                <td class="p-3 border border-slate-200">Curvas continuas y suaves sin asíntotas verticales.</td>
+                                <td class="p-3 border border-slate-200">Pueden presentar huecos, saltos y asíntotas.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 border border-slate-200 font-semibold">Asíntotas</td>
+                                <td class="p-3 border border-slate-200">No verticales ni oblicuas (salvo constante horizontal).</td>
+                                <td class="p-3 border border-slate-200">Pueden tener verticales, horizontales u oblicuas.</td>
+                            </tr>
+                            <tr class="bg-slate-50">
+                                <td class="p-3 border border-slate-200 font-semibold">Ejemplo</td>
+                                <td class="p-3 border border-slate-200">\\(f(x) = x^2 - 4\\)</td>
+                                <td class="p-3 border border-slate-200">\\(g(x) = \frac{1}{x-2}\\)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SIMULADOR INTERACTIVO -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-100 pb-4 gap-4">
+                    <div>
+                        <span class="text-indigo-600 font-semibold text-sm">Herramienta Interactiva</span>
+                        <h3 class="text-2xl font-bold text-slate-900">Simulador Gráfico Dinámico</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="setMode('poly')" id="btn-mode-poly" class="px-4 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white transition">Polinomiales</button>
+                        <button onclick="setMode('rat')" id="btn-mode-rat" class="px-4 py-2 text-sm font-medium rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition">Racionales</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Controles del simulador -->
+                    <div class="space-y-4 bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="font-bold text-slate-900 text-base" id="simulator-title">Parámetros de la Función Polinomial</h4>
+                        <p class="text-xs text-slate-500" id="simulator-desc">Selecciona o ajusta la función para visualizar su gráfica, ceros y comportamiento en tiempo real.</p>
+                        
+                        <div id="controls-poly" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">Modelo Polinomial:</label>
+                                <select id="poly-select" onchange="updatePolyPreset()" class="w-full p-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                    <option value="p1">Lineal: f(x) = 2x - 3</option>
+                                    <option value="p2" selected>Cuadrática: f(x) = x² - 4x + 3</option>
+                                    <option value="p3">Cúbica: f(x) = x³ - 3x</option>
+                                    <option value="p4">Grado 4: f(x) = x⁴ - 5x² + 4</option>
+                                </select>
+                            </div>
+                            <div class="space-y-2 pt-2">
+                                <label class="text-xs font-semibold text-slate-600">Coeficiente Principal (a): <span id="val-a" class="font-mono text-indigo-600">1</span></label>
+                                <input type="range" id="range-a" min="-3" max="3" step="0.5" value="1" oninput="drawCanvas()" class="w-full accent-indigo-600">
+                            </div>
+                        </div>
+
+                        <div id="controls-rat" class="space-y-4 hidden">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">Modelo Racional:</label>
+                                <select id="rat-select" onchange="drawCanvas()" class="w-full p-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                    <option value="r1">f(x) = 1 / x (Básica)</option>
+                                    <option value="r2" selected>f(x) = (2x + 1) / (x - 3)</option>
+                                    <option value="r3">f(x) = (x² + 1) / (x - 1) (Oblicua)</option>
+                                    <option value="r4">f(x) = (x² - 1) / (x - 1) (Hueco en x=1)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-200 text-xs text-slate-600 space-y-1">
+                            <p><strong>Dominio analizado:</strong> <span id="info-domain" class="font-mono text-indigo-700">(-\infty, \infty)</span></p>
+                            <p><strong>Ceros detectados:</strong> <span id="info-zeros" class="font-mono text-indigo-700">x = 1, x = 3</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Canvas Gráfico -->
+                    <div class="lg:col-span-2 bg-slate-900 rounded-xl p-4 flex flex-col items-center justify-center relative shadow-inner min-h-[400px]">
+                        <canvas id="mathCanvas" width="650" height="400" class="w-full h-auto max-w-full rounded bg-slate-950 border border-slate-800"></canvas>
+                        <div class="absolute bottom-6 right-6 bg-slate-900/80 backdrop-blur px-3 py-1.5 rounded text-xs text-slate-300 border border-slate-700">
+                            Ejes: X [-10, 10] | Y [-10, 10]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: EJERCICIO PRÁCTICO RESUELTO Y AUTOEVALUACIÓN -->
+        <section id="ejercicios" class="space-y-10">
+            <div class="bg-gradient-to-r from-indigo-950 to-slate-900 text-white p-8 rounded-2xl shadow-lg">
+                <span class="text-indigo-400 font-semibold tracking-wide text-xs uppercase">Sección 03</span>
+                <h2 class="text-3xl font-extrabold mt-1 mb-4">Ejercicios Prácticos Resueltos y Autoevaluación</h2>
+                <p class="text-slate-300 max-w-4xl text-lg leading-relaxed">
+                    Examina la resolución paso a paso de problemas modelo y pon a prueba tus conocimientos con el módulo interactivo de dificultad progresiva.
+                </p>
+            </div>
+
+            <!-- Problemas Resueltos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Problema A -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <span class="text-xs font-semibold px-2 py-1 bg-indigo-50 text-indigo-600 rounded">Problema A</span>
+                    <h3 class="text-xl font-bold text-slate-900">Análisis Polinomial Completo</h3>
+                    <p class="text-sm text-slate-600">Dada \\(f(x) = x^3 - 3x^2 - 4x + 12\\), determina su factorización, ceros y comportamiento.</p>
+                    <div class="space-y-3 text-sm text-slate-700 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <p><strong>Paso 1 (Factorización):</strong> Agrupando términos se obtiene \\(x^2(x-3) - 4(x-3) = (x^2-4)(x-3) = (x-2)(x+2)(x-3)\\).</p>
+                        <p><strong>Paso 2 (Ceros):</strong> Igualando a cero: \\(x = 2, x = -2, x = 3\\).</p>
+                        <p><strong>Paso 3 (Eje Y):</strong> Evaluando \\(f(0) = 12\\) \\(\to (0,12)\\).</p>
+                        <p><strong>Paso 4 (Extremos):</strong> Grado 3 con coeficiente positivo: \\(x \to -\infty \Rightarrow f(x) \to -\infty\\) y \\(x \to +\infty \Rightarrow f(x) \to +\infty\\).</p>
+                    </div>
+                </div>
+
+                <!-- Problema B -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                    <span class="text-xs font-semibold px-2 py-1 bg-indigo-50 text-indigo-600 rounded">Problema B</span>
+                    <h3 class="text-xl font-bold text-slate-900">Análisis Racional con Discontinuidad</h3>
+                    <p class="text-sm text-slate-600">Dada \\(g(x) = \frac{x^2 - 1}{x - 1}\\), determina su dominio, simplificación y huecos.</p>
+                    <div class="space-y-3 text-sm text-slate-700 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <p><strong>Paso 1 (Dominio):</strong> \\(x - 1 \neq 0 \Rightarrow D_g = \mathbb{R} \setminus \{1\\).</p>
+                        <p><strong>Paso 2 (Factorización):</strong> \\(g(x) = \frac{(x-1)(x+1)}{x-1}\\).</p>
+                        <p><strong>Paso 3 (Simplificación):</strong> Para \\(x \neq 1\\), \\(g(x) = x + 1\\).</p>
+                        <p><strong>Paso 4 (Discontinuidad):</strong> Presenta un hueco removible en \\((1,2)\\) y su intersección en \\(y\\) es \\((0,1)\\).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejercicios Interactivos Progresivos -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <span class="text-indigo-600 font-semibold text-sm">Autoevaluación</span>
+                    <h3 class="text-2xl font-bold text-slate-900">Ejercicios Interactivos Progresivos</h3>
+                </div>
+
+                <div id="quiz-container" class="space-y-6">
+                    <div class="p-6 rounded-xl border border-slate-200 bg-slate-50 space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span id="quiz-level" class="text-xs font-bold px-2 py-1 bg-indigo-100 text-indigo-700 rounded">Nivel Básico</span>
+                            <span id="quiz-progress" class="text-xs font-semibold text-slate-500">Pregunta 1 de 4</span>
+                        </div>
+                        <h4 id="quiz-question" class="font-bold text-slate-900 text-base">¿Cuál es el grado y el coeficiente principal del polinomio \\(P(x) = 5x^4 - 2x^2 + x - 7\\)?</h4>
+                        
+                        <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <button onclick="checkAnswer(0)" class="p-3 text-left bg-white border border-slate-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50/50 transition text-sm">A) Grado 4, Coeficiente 5</button>
+                            <button onclick="checkAnswer(1)" class="p-3 text-left bg-white border border-slate-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50/50 transition text-sm">B) Grado 5, Coeficiente 4</button>
+                            <button onclick="checkAnswer(2)" class="p-3 text-left bg-white border border-slate-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50/50 transition text-sm">C) Grado 4, Coeficiente -7</button>
+                            <button onclick="checkAnswer(3)" class="p-3 text-left bg-white border border-slate-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50/50 transition text-sm">D) Grado 2, Coeficiente 5</button>
+                        </div>
+                        <div id="quiz-feedback" class="hidden p-4 rounded-lg text-sm font-medium"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: CONCLUSIONES Y BIBLIOGRAFÍA ACADÉMICA -->
+        <section id="conclusiones" class="space-y-10">
+            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white p-8 rounded-2xl shadow-lg">
+                <span class="text-indigo-400 font-semibold tracking-wide text-xs uppercase">Sección 04</span>
+                <h2 class="text-3xl font-extrabold mt-1 mb-4">Conclusiones y Bibliografía Académica</h2>
+                <p class="text-slate-300 max-w-4xl text-lg leading-relaxed">
+                    Síntesis conceptual y fuentes de referencia rigurosas para profundizar en el estudio del precálculo matemático.
+                </p>
+            </div>
+
+            <!-- Conclusiones -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+                <h3 class="text-2xl font-bold text-slate-900">Conclusiones Académicas</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                        <span class="font-bold text-indigo-600 text-sm">01. Comportamiento Extremo</span>
+                        <p class="text-sm text-slate-600 leading-relaxed">El grado y el coeficiente principal determinan de manera absoluta el comportamiento asintótico extremo de cualquier función polinomial en el plano real.</p>
+                    </div>
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                        <span class="font-bold text-indigo-600 text-sm">02. Utilidad de la Factorización</span>
+                        <p class="text-sm text-slate-600 leading-relaxed">Las técnicas de factorización algebraica y los teoremas del factor y del resto son herramientas indispensables para hallar ceros exactos y multiplicidades.</p>
+                    </div>
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                        <span class="font-bold text-indigo-600 text-sm">03. Restricciones en Racionales</span>
+                        <p class="text-sm text-slate-600 leading-relaxed">El análisis de dominios, asíntotas verticales, horizontales, oblicuas y discontinuidades removibles define la estructura topológica de las funciones racionales.</p>
+                    </div>
+                    <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+                        <span class="font-bold text-indigo-600 text-sm">04. Enfoque Integral</span>
+                        <p class="text-sm text-slate-600 leading-relaxed">La combinación sinérgica de demostraciones algebraicas formales, representaciones gráficas precisas y simuladores interactivos potencia significativamente el aprendizaje significativo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bibliografía Académica -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+                <h3 class="text-2xl font-bold text-slate-900">Bibliografía Académica Verificada</h3>
+                <ul class="space-y-4 text-sm text-slate-700">
+                    <li class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex flex-col space-y-1">
+                        <span class="font-bold text-slate-900">OpenStax (2021). Precalculus 2e.</span>
+                        <span class="text-slate-600">Rice University. Capítulos 3 y 5: Funciones Polinomiales y Racionales.</span>
+                        <a href="https://openstax.org/details/books/precalculus-2e" target="_blank" class="text-indigo-600 hover:underline text-xs mt-1">https://openstax.org/details/books/precalculus-2e</a>
+                    </li>
+                    <li class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex flex-col space-y-1">
+                        <span class="font-bold text-slate-900">OpenStax (2022). Algebra and Trigonometry 2e.</span>
+                        <span class="text-slate-600">Rice University. Secciones de polinomios y cocientes racionales.</span>
+                        <a href="https://openstax.org/details/books/algebra-and-trigonometry-2e" target="_blank" class="text-indigo-600 hover:underline text-xs mt-1">https://openstax.org/details/books/algebra-and-trigonometry-2e</a>
+                    </li>
+                    <li class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex flex-col space-y-1">
+                        <span class="font-bold text-slate-900">Stewart, J., Redlin, L. y Watson, S. (2015). Precalculus: Mathematics for Calculus.</span>
+                        <span class="text-slate-600">Cengage Learning. Capítulo sobre funciones polinomiales y racionales (7ª ed.).</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="bg-slate-900 text-slate-400 py-10 mt-20 border-t border-slate-800 text-center text-sm">
+        <div class="max-w-7xl mx-auto px-4 space-y-3">
+            <p>Monte Verde Bilingual School</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT JAVASCRIPT PARA SIMULADOR Y QUIZ -->
+    <script>
+        let currentMode = 'poly';
+
+        function setMode(mode) {
+            currentMode = mode;
+            const btnPoly = document.getElementById('btn-mode-poly');
+            const btnRat = document.getElementById('btn-mode-rat');
+            const controlsPoly = document.getElementById('controls-poly');
+            const controlsRat = document.getElementById('controls-rat');
+            const title = document.getElementById('simulator-title');
+            const desc = document.getElementById('simulator-desc');
+
+            if (mode === 'poly') {
+                btnPoly.className = "px-4 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white transition";
+                btnRat.className = "px-4 py-2 text-sm font-medium rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition";
+                controlsPoly.classList.remove('hidden');
+                controlsRat.classList.add('hidden');
+                title.innerText = "Parámetros de la Función Polinomial";
+                desc.innerText = "Selecciona o ajusta la función polinomial para visualizar su gráfica y comportamiento.";
+            } else {
+                btnRat.className = "px-4 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white transition";
+                btnPoly.className = "px-4 py-2 text-sm font-medium rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 transition";
+                controlsRat.classList.remove('hidden');
+                controlsPoly.classList.add('hidden');
+                title.innerText = "Parámetros de la Función Racional";
+                desc.innerText = "Explora asíntotas verticales, horizontales, oblicuas y discontinuidades removibles.";
+            }
+            drawCanvas();
+        }
+
+        function updatePolyPreset() {
+            drawCanvas();
+        }
+
+        // Lógica del Canvas
+        function drawCanvas() {
+            const canvas = document.getElementById('mathCanvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.clearRect(0, 0, width, height);
+
+            // Fondo y cuadrícula
+            ctx.fillStyle = '#020617';
+            ctx.fillRect(0, 0, width, height);
+
+            const scaleX = width / 20; // de -10 a 10
+            const scaleY = height / 20; // de -10 a 10
+            const originX = width / 2;
+            const originY = height / 2;
+
+            // Dibujar cuadrícula
+            ctx.strokeStyle = '#1e293b';
+            ctx.lineWidth = 1;
+            for (let i = -10; i <= 10; i++) {
+                let x = originX + i * scaleX;
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke();
+                let y = originY + i * scaleY;
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke();
+            }
+
+            // Ejes coordenados
+            ctx.strokeStyle = '#64748b';
+            ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.moveTo(0, originY); ctx.lineTo(width, originY); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(originX, 0); ctx.lineTo(originX, height); ctx.stroke();
+
+            // Función a graficar
+            ctx.strokeStyle = '#6366f1';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+
+            let evalFunc;
+            let aVal = parseFloat(document.getElementById('range-a').value);
+            document.getElementById('val-a').innerText = aVal;
+
+            if (currentMode === 'poly') {
+                const preset = document.getElementById('poly-select').value;
+                if (preset === 'p1') evalFunc = x => aVal * (2 * x - 3);
+                if (preset === 'p2') evalFunc = x => aVal * (x * x - 4 * x + 3);
+                if (preset === 'p3') evalFunc = x => aVal * (x * x * x - 3 * x);
+                if (preset === 'p4') evalFunc = x => aVal * (x * x * x * x - 5 * x * x + 4);
+
+                document.getElementById('info-domain').innerText = "(-\\infty, \\infty)";
+                document.getElementById('info-zeros').innerText = preset === 'p2' ? "x = 1, x = 3" : "Calculados numéricamente";
+
+                let first = true;
+                for (let px = 0; px <= width; px += 2) {
+                    let x = (px - originX) / scaleX;
+                    let y = evalFunc(x);
+                    let py = originY - y * scaleY;
+                    if (first) { ctx.moveTo(px, py); first = false; }
+                    else { ctx.lineTo(px, py); }
+                }
+                ctx.stroke();
+
+            } else {
+                const preset = document.getElementById('rat-select').value;
+                if (preset === 'r1') {
+                    evalFunc = x => x === 0 ? NaN : 1 / x;
+                    document.getElementById('info-domain').innerText = "\\mathbb{R} \\setminus \\{0\\}";
+                    document.getElementById('info-zeros').innerText = "Ninguno";
+                    // Dibujar asintota vertical x=0
+                    ctx.strokeStyle = '#ef4444'; ctx.setLineDash([5, 5]);
+                    ctx.beginPath(); ctx.moveTo(originX, 0); ctx.lineTo(originX, height); ctx.stroke();
+                    ctx.setLineDash([]);
+                } else if (preset === 'r2') {
+                    evalFunc = x => Math.abs(x - 3) < 0.05 ? NaN : (2 * x + 1) / (x - 3);
+                    document.getElementById('info-domain').innerText = "\\mathbb{R} \\setminus \\{3\\}";
+                    document.getElementById('info-zeros').innerText = "x = -0.5";
+                    // AV x=3
+                    ctx.strokeStyle = '#ef4444'; ctx.setLineDash([5, 5]);
+                    ctx.beginPath(); ctx.moveTo(originX + 3 * scaleX, 0); ctx.lineTo(originX + 3 * scaleX, height); ctx.stroke();
+                    // AH y=2
+                    ctx.beginPath(); ctx.moveTo(0, originY - 2 * scaleY); ctx.lineTo(width, originY - 2 * scaleY); ctx.stroke();
+                    ctx.setLineDash([]);
+                } else if (preset === 'r3') {
+                    evalFunc = x => Math.abs(x - 1) < 0.05 ? NaN : (x * x + 1) / (x - 1);
+                    document.getElementById('info-domain').innerText = "\\mathbb{R} \\setminus \\{1\\}";
+                    document.getElementById('info-zeros').innerText = "Ninguno real";
+                    // AV x=1
+                    ctx.strokeStyle = '#ef4444'; ctx.setLineDash([5, 5]);
+                    ctx.beginPath(); ctx.moveTo(originX + 1 * scaleX, 0); ctx.lineTo(originX + 1 * scaleX, height); ctx.stroke();
+                    ctx.setLineDash([]);
+                } else if (preset === 'r4') {
+                    evalFunc = x => Math.abs(x - 1) < 0.05 ? x + 1 : (x * x - 1) / (x - 1);
+                    document.getElementById('info-domain').innerText = "\\mathbb{R} \\setminus \\{1\\}";
+                    document.getElementById('info-zeros').innerText = "x = -1";
+                    // Dibujar hueco en (1, 2)
+                    ctx.fillStyle = '#f59e0b';
+                    ctx.beginPath();
+                    ctx.arc(originX + 1 * scaleX, originY - 2 * scaleY, 5, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+
+                ctx.strokeStyle = '#38bdf8';
+                ctx.lineWidth = 3;
+                let first = true;
+                for (let px = 0; px <= width; px += 2) {
+                    let x = (px - originX) / scaleX;
+                    let y = evalFunc(x);
+                    if (isNaN(y) || Math.abs(y) > 20) { first = true; continue; }
+                    let py = originY - y * scaleY;
+                    if (first) { ctx.moveTo(px, py); first = false; }
+                    else { ctx.lineTo(px, py); }
+                }
+                ctx.stroke();
+            }
+        }
+
+        // Cuestionario Interactivo Progresivo
+        let currentQuiz = 0;
+        const quizData = [
+            {
+                level: "Nivel Básico",
+                question: "¿Cuál es el grado y el coeficiente principal del polinomio \\(P(x) = 5x^4 - 2x^2 + x - 7\\)?",
+                options: [
+                    "A) Grado 4, Coeficiente 5",
+                    "B) Grado 5, Coeficiente 4",
+                    "C) Grado 4, Coeficiente -7",
+                    "D) Grado 2, Coeficiente 5"
+                ],
+                correct: 0,
+                explanation: "¡Correcto! El grado está dado por la mayor potencia de \\(x\\) (que es 4) y su coeficiente principal es el factor que lo acompaña (5)."
+            },
+            {
+                level: "Nivel Intermedio",
+                question: "¿Cuáles son los ceros reales del polinomio \\(f(x) = (x-2)(x+3)\\)?",
+                options: [
+                    "A) \\(x = -2, x = 3\\)",
+                    "B) \\(x = 2, x = -3\\)",
+                    "C) \\(x = 2, x = 3\\)",
+                    "D) \\(x = 0, x = -6\\)"
+                ],
+                correct: 1,
+                explanation: "¡Excelente! Al igualar cada factor a cero: \\(x - 2 = 0 \Rightarrow x = 2\\) y \\(x + 3 = 0 \Rightarrow x = -3\\)."
+            },
+            {
+                level: "Nivel Intermedio-Avanzado",
+                question: "¿Cuál es el dominio de la función racional \\(f(x) = \\frac{x+1}{x^2 - 9\\)?",
+                options: [
+                    "A) \\(\\mathbb{R}\\)",
+                    "B) \\(\\mathbb{R} \\setminus \\{-1\\}\\)",
+                    "C) \\(\\mathbb{R} \\setminus \\{-3, 3\\}\\)",
+                    "D) \\((-3, 3)\\)"
+                ],
+                correct: 2,
+                explanation: "¡Muy bien! El denominador \\(x^2 - 9 = (x-3)(x+3)\\) se anula en \\(x = 3\\) y \\(x = -3\\), por lo que se deben excluir."
+            },
+            {
+                level: "Nivel Avanzado",
+                question: "Dada \\(f(x) = \\frac{2x^2 + 1}{x^2 - 4\\), ¿cuál es su asíntota horizontal?",
+                options: [
+                    "A) \\(y = 0\\)",
+                    "B) \\(y = 2\\)",
+                    "C) \\(y = -1/4\\)",
+                    "D) No tiene asíntota horizontal"
+                ],
+                correct: 1,
+                explanation: "¡Correcto! Como el grado del numerador y del denominador son iguales (grado 2), la asíntota horizontal es el cociente de los coeficientes principales: \\(y = 2/1 = 2\\)."
+            }
+        ];
+
+        function checkAnswer(selected) {
+            const q = quizData[currentQuiz];
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.classList.remove('hidden');
+            if (selected === q.correct) {
+                feedback.className = "p-4 rounded-lg text-sm font-medium bg-emerald-50 text-emerald-800 border border-emerald-200";
+                feedback.innerHTML = q.explanation + " <button onclick='nextQuiz()' class='ml-4 underline font-bold'>Siguiente pregunta &rarr;</button>";
+            } else {
+                feedback.className = "p-4 rounded-lg text-sm font-medium bg-rose-50 text-rose-800 border border-rose-200";
+                feedback.innerHTML = "Incorrecto. Inténtalo nuevamente analizando los conceptos teóricos de la sección correspondiente.";
+            }
+        }
+
+        function nextQuiz() {
+            currentQuiz = (currentQuiz + 1) % quizData.length;
+            const q = quizData[currentQuiz];
+            document.getElementById('quiz-level').innerText = q.level;
+            document.getElementById('quiz-progress').innerText = `Pregunta ${currentQuiz + 1} de 4`;
+            document.getElementById('quiz-question').innerHTML = q.question;
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            q.options.forEach((opt, idx) => {
+                optionsContainer.innerHTML += `<button onclick="checkAnswer(${idx})" class="p-3 text-left bg-white border border-slate-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50/50 transition text-sm">${opt}</button>`;
+            });
+            document.getElementById('quiz-feedback').classList.add('hidden');
+            if (window.renderMathInElement) renderMathInElement(document.body);
+        }
+
+        window.onload = () => {
+            drawCanvas();
+        };
+    </script>
+</body>
+</html>

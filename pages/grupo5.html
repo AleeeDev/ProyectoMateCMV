@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones Trigonométricas: Enfoque del Triángulo Rectángulo</title>
+    <!-- Google Fonts & MathJax -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --accent: #f59e0b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e293b 100%);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.25rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #93c5fd;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        nav {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            overflow-x: auto;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Estilo específico para el botón de regreso a main.html */
+        nav a.btn-main-return {
+            background-color: #eff6ff;
+            color: var(--primary);
+            border: 1px solid var(--primary-light);
+            font-weight: 700;
+        }
+
+        nav a.btn-main-return:hover {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.75rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        h3 {
+            color: var(--primary-light);
+            font-size: 1.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            padding-left: 1.5rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .info-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            display: block;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: #eff6ff;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .diagram-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .simulator-box, .activity-box {
+            background: #f8fafc;
+            border: 2px solid var(--primary-light);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .control-group {
+            margin-bottom: 1rem;
+        }
+
+        .control-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .control-group input, .control-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1e293b;
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .feedback.correct {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+
+        .feedback.incorrect {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+
+        /* Botón inferior de retorno a main.html */
+        .footer-action {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .btn-return-footer {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-return-footer:hover {
+            background-color: var(--primary-light);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border);
+            background: white;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.75rem; }
+            section { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <header>
+        <h1>Funciones Trigonométricas</h1>
+        <p>Enfoque del Triángulo Rectángulo | Recurso Académico Preuniversitario Interactivo</p>
+    </header>
+
+    <nav>
+        <!-- Enlace explícito para regresar a main.html -->
+        <a href="#seccion1" class="active">1. Teoría</a>
+        <a href="#seccion2">2. Interactividad</a>
+        <a href="#seccion3">3. Práctica</a>
+        <a href="#seccion4">4. Conclusiones</a>
+    </nav>
+
+    <main>
+        <!-- SECCIÓN 1: INTRODUCCIÓN Y FUNDAMENTOS TEÓRICOS -->
+        <section id="seccion1">
+            <h2>1. Introducción y Fundamentos Teóricos</h2>
+            <p>La trigonometría, etimológicamente derivada del griego <em>trigonon</em> (triángulo) y <em>metron</em> (medida), es la rama de las matemáticas que estudia las relaciones métricas entre los lados y los ángulos de los triángulos. Su desarrollo es fundamental para la física, la arquitectura, la ingeniería y la topografía.</p>
+
+            <h3>Elementos de un Triángulo Rectángulo</h3>
+            <p>Un triángulo rectángulo posee un ángulo recto (90°). Sus componentes son:</p>
+            <div class="card-grid">
+                <div class="info-card">
+                    <h4>Hipotenusa (\(c\))</h4>
+                    <p>Lado opuesto al ángulo recto; el de mayor longitud.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Cateto Opuesto (\(a\))</h4>
+                    <p>Lado situado enfrente del ángulo agudo de referencia.</p>
+                </div>
+                <div class="info-card">
+                    <h4>Cateto Adyacente (\(b\))</h4>
+                    <p>Cateto contiguo al ángulo de referencia, sin incluir la hipotenusa.</p>
+                </div>
+            </div>
+
+            <p><em>Nota:</em> Los catetos cambian según el ángulo elegido; la hipotenusa permanece constante.</p>
+
+            <div class="diagram-container">
+                <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=1330731609075922" alt="Diagrama de razones trigonométricas en triángulo rectángulo" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border);" />
+            </div>
+
+            <h3>Razones Trigonométricas Fundamentales</h3>
+            <p>Respecto a un ángulo agudo \(\theta\):</p>
+            <ul>
+                <li><strong>Seno:</strong> \(\operatorname{sen}(\theta) = \frac{\text{Cateto Opuesto}}{\text{Hipotenusa}} = \frac{a}{c}\)</li>
+                <li><strong>Coseno:</strong> \(\cos(\theta) = \frac{\text{Cateto Adyacente}}{\text{Hipotenusa}} = \frac{b}{c}\)</li>
+                <li><strong>Tangente:</strong> \(\tan(\theta) = \frac{\text{Cateto Opuesto}}{\text{Cateto Adyacente}} = \frac{a}{b}\)</li>
+                <li><strong>Cosecante:</strong> \(\csc(\theta) = \frac{c}{a}\)</li>
+                <li><strong>Secante:</strong> \(\sec(\theta) = \frac{c}{b}\)</li>
+                <li><strong>Cotangente:</strong> \(\cot(\theta) = \frac{b}{a}\)</li>
+            </ul>
+
+            <div class="info-card" style="margin-top: 1rem;">
+                <h4>Regla Mnemotécnica: SOH-CAH-TOA</h4>
+                <p><strong>SOH</strong> (Seno = Opuesto / Hipotenusa) | <strong>CAH</strong> (Coseno = Adyacente / Hipotenusa) | <strong>TOA</strong> (Tangente = Opuesto / Adyacente)</p>
+            </div>
+
+            <h3>Teorema de Pitágoras</h3>
+            <p style="text-align: center; font-size: 1.2rem; font-weight: bold; color: var(--primary);">$$a^2 + b^2 = c^2$$</p>
+
+            <h3>Ángulos Notables</h3>
+            <table>
+                <thead>
+                    <tr><th>Ángulo (\(\theta\))</th><th>\(\operatorname{sen}(\theta)\)</th><th>\(\cos(\theta)\)</th><th>\(\tan(\theta)\)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>\(30^\circ\)</td><td>\(1/2\)</td><td>\(\sqrt{3}/2\)</td><td>\(\sqrt{3}/3\)</td></tr>
+                    <tr><td>\(45^\circ\)</td><td>\(\sqrt{2}/2\)</td><td>\(\sqrt{2}/2\)</td><td>\(1\)</td></tr>
+                    <tr><td>\(60^\circ\)</td><td>\(\sqrt{3}/2\)</td><td>\(1/2\)</td><td>\(\sqrt{3}\)</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECCIÓN 2: METODOLOGÍA COMPARADA E INTERACTIVIDAD -->
+        <section id="seccion2">
+            <h2>2. Metodología Comparada e Interactividad</h2>
+            <p>Elegir la razón adecuada depende de los datos disponibles y de la incógnita a resolver.</p>
+
+            <table>
+                <thead>
+                    <tr><th>Razón</th><th>Fórmula</th><th>Lados Relacionados</th><th>Cuándo Utilizarla</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Seno</td><td>\(\frac{\text{Op}}{\text{Hip}}\)</td><td>Opuesto e Hipotenusa</td><td>Conoces ángulo e hipotenusa y buscas opuesto.</td></tr>
+                    <tr><td>Coseno</td><td>\(\frac{\text{Ady}}{\text{Hip}}\)</td><td>Adyacente e Hipotenusa</td><td>Conoces ángulo e hipotenusa y buscas adyacente.</td></tr>
+                    <tr><td>Tangente</td><td>\(\frac{\text{Op}}{\text{Ady}}\)</td><td>Opuesto y Adyacente</td><td>Conoces un cateto y buscas el otro.</td></tr>
+                </tbody>
+            </table>
+
+            <!-- SIMULADOR INTERACTIVO -->
+            <div class="simulator-box">
+                <h3>Simulador Interactivo de Triángulos Rectángulos</h3>
+                <div class="card-grid">
+                    <div class="control-group">
+                        <label for="simAngle">Ángulo \(\theta\) (°): <span id="valAngle">30</span></label>
+                        <input type="range" id="simAngle" min="1" max="89" value="30">
+                    </div>
+                    <div class="control-group">
+                        <label for="simSide">Cateto Adyacente (\(b\)): <span id="valSide">10</span></label>
+                        <input type="range" id="simSide" min="2" max="50" value="10">
+                    </div>
+                </div>
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border); margin-top: 1rem;">
+                    <h4>Resultados del Cálculo Dinámico:</h4>
+                    <p id="simResults">Mueve los controles para calcular...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: EJERCICIOS PRÁCTICOS -->
+        <section id="seccion3">
+            <h2>3. Ejercicios Prácticos Resueltos y Actividades</h2>
+            <div class="info-card">
+                <h3>Ejercicio 1</h3>
+                <p>Cateto opuesto = 6 cm, Hipotenusa = 10 cm. Calcula el seno: \(\operatorname{sen}(\theta) = \frac{6}{10} = 0.6\).</p>
+            </div>
+
+            <div class="activity-box">
+                <h3>Práctica Autónoma Interactiva</h3>
+                <p>Calcula el seno de un ángulo sabiendo que su cateto opuesto mide 3 cm y su hipotenusa mide 5 cm. Introduce tu resultado decimal:</p>
+                <div class="control-group">
+                    <input type="text" id="userAnswer" placeholder="Ej. 0.6">
+                </div>
+                <button class="btn" onclick="checkAnswer()">Comprobar Respuesta</button>
+                <div id="feedbackBox" class="feedback" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: CONCLUSIONES Y BIBLIOGRAFÍA -->
+        <section id="seccion4">
+            <h2>4. Conclusiones y Bibliografía Académica</h2>
+            <p>El dominio de las razones trigonométricas en triángulos rectángulos es fundamental para la resolución de problemas geométricos aplicados.</p>
+
+            <h3>Bibliografía Académica</h3>
+            <ul style="list-style-type: disc;">
+                <li>OpenStax. (2020). <em>Precalculus 2e</em>. <a href="https://openstax.org/details/books/precalculus-2e" target="_blank">Enlace</a></li>
+                <li>OpenStax. (2020). <em>Algebra and Trigonometry 2e</em>. <a href="https://openstax.org/details/books/algebra-and-trigonometry-2e" target="_blank">Enlace</a></li>
+                <li>Stewart, J., Redlin, L., & Watson, S. (2015). <em>Precalculus: Mathematics for Calculus</em>. Cengage Learning.</li>
+            </ul>
+
+            <div class="footer-action">
+                <a href="/index.html" class="btn-return-footer">← Go Back</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Monte Verde Bilingual School. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- SCRIPT DE INTERACTIVIDAD -->
+    <script>
+        const navLinks = document.querySelectorAll('nav a:not(.btn-main-return)');
+        window.addEventListener('scroll', () => {
+            let fromTop = window.scrollY + 150;
+            navLinks.forEach(link => {
+                let section = document.querySelector(link.hash);
+                if (section && section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Simulador Interactivo
+        const simAngle = document.getElementById('simAngle');
+        const simSide = document.getElementById('simSide');
+        const valAngle = document.getElementById('valAngle');
+        const valSide = document.getElementById('valSide');
+        const simResults = document.getElementById('simResults');
+
+        function updateSimulator() {
+            const angleDeg = parseFloat(simAngle.value);
+            const b = parseFloat(simSide.value);
+            valAngle.textContent = angleDeg;
+            valSide.textContent = b;
+
+            const angleRad = angleDeg * (Math.PI / 180);
+            const a = b * Math.tan(angleRad);
+            const c = b / Math.cos(angleRad);
+
+            const sen = Math.sin(angleRad);
+            const cos = Math.cos(angleRad);
+            const tan = Math.tan(angleRad);
+
+            simResults.innerHTML = `
+                <strong>Ángulo (\(\theta\)):</strong> ${angleDeg}°<br>
+                <strong>Cateto Adyacente (\(b\)):</strong> ${b.toFixed(2)} cm<br>
+                <strong>Cateto Opuesto (\(a\)):</strong> ${a.toFixed(2)} cm<br>
+                <strong>Hipotenusa (\(c\)):</strong> ${c.toFixed(2)} cm<br><br>
+                <strong>Razones Trigonométricas:</strong><br>
+                • Seno = ${sen.toFixed(4)} | • Coseno = ${cos.toFixed(4)} | • Tangente = ${tan.toFixed(4)}
+            `;
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        simAngle.addEventListener('input', updateSimulator);
+        simSide.addEventListener('input', updateSimulator);
+        updateSimulator();
+
+        function checkAnswer() {
+            const userVal = parseFloat(document.getElementById('userAnswer').value.trim());
+            const feedbackBox = document.getElementById('feedbackBox');
+            feedbackBox.style.display = 'block';
+
+            if (isNaN(userVal)) {
+                feedbackBox.className = 'feedback incorrect';
+                feedbackBox.textContent = 'Por favor, introduce un número válido (ej. 0.6).';
+                return;
+            }
+
+            if (Math.abs(userVal - 0.6) <= 0.02) {
+                feedbackBox.className = 'feedback correct';
+                feedbackBox.textContent = '¡Correcto! El seno es 3/5 = 0.6. ¡Excelente trabajo!';
+            } else {
+                feedbackBox.className = 'feedback incorrect';
+                feedbackBox.textContent = 'Incorrecto. Recuerda que el seno es Cateto Opuesto / Hipotenusa (3 / 5 = 0.6).';
+            }
+        }
+    </script>
+</body>
+</html>

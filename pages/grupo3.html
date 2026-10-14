@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones Exponenciales y Logarítmicas | Portal Académico</title>
+    <!-- Google Fonts & Tailwind CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        indigo: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        },
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        accent: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- MathJax for Mathematical Rendering -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-display { overflow-x: auto; overflow-y: hidden; }
+        .bg-grid-pattern {
+            background-size: 30px 30px;
+            background-image: radial-gradient(circle, #cbd5e1 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50/70 text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER & NAVIGATION -->
+    <header class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-gradient-to-tr from-brand-700 to-brand-500 text-white p-2.5 rounded-xl shadow-md shadow-brand-500/20">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                </div>
+                <div>
+                    <h1 class="text-sm font-extrabold text-slate-900 tracking-tight leading-none">Cálculo & Precálculo</h1>
+                    <p class="text-[11px] font-medium text-brand-600 mt-0.5">Funciones Exponenciales y Logarítmicas</p>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                <a href="#fundamentos" class="hover:text-brand-600 transition-colors">1. Fundamentos</a>
+                <a href="#metodologia" class="hover:text-brand-600 transition-colors">2. Interactividad</a>
+                <a href="#ejercicios" class="hover:text-brand-600 transition-colors">3. Práctica Resuelta</a>
+                <a href="#conclusiones" class="hover:text-brand-600 transition-colors">4. Conclusiones</a>
+            </nav>
+
+            <div>
+                <!-- Botón funcional para regresar a Main -->
+                <a href="/index.html" id="btnMain" class="inline-flex items-center space-x-2 bg-slate-900 hover:bg-brand-600 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all shadow-sm hover:shadow-md hover:shadow-brand-600/20">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    <span>Volver a Main</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16 w-full flex-grow">
+
+        <!-- SECCIÓN 1: INTRODUCCIÓN Y FUNDAMENTOS -->
+        <section id="fundamentos" class="space-y-10">
+            <div class="border-b border-slate-200/80 pb-5">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200/60 mb-2">Sección Académica I</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Introducción y Fundamentos Teóricos</h2>
+                <p class="text-slate-600 text-sm mt-1.5 max-w-3xl leading-relaxed">Comprende las características algebraicas y gráficas de las funciones exponenciales y logarítmicas, su relación simétrica como funciones inversas y sus modelos de aplicación real.</p>
+            </div>
+
+            <!-- A. Funciones Exponenciales -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow space-y-6">
+                <div class="flex items-center space-x-3">
+                    <span class="w-2.5 h-6 bg-brand-600 rounded-full"></span>
+                    <h3 class="text-lg font-bold text-slate-900 tracking-tight">A. Funciones Exponenciales</h3>
+                </div>
+                <p class="text-slate-700 text-sm leading-relaxed">
+                    Una función exponencial es aquella en la que la variable independiente aparece en el exponente. Su forma general algebraica es:
+                </p>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80 text-center font-mono text-brand-700 math-display text-sm">
+                    $f(x) = a^x, \qquad a > 0, \quad a \neq 1$
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-1">
+                    <div class="bg-slate-50/80 p-5 rounded-xl border border-slate-200/60 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider text-brand-700">Características Fundamentales</h4>
+                        <ul class="list-disc list-inside text-xs text-slate-600 space-y-1.5">
+                            <li><strong>Dominio:</strong> $\mathbb{R}$ ($-\infty, \infty$)</li>
+                            <li><strong>Rango:</strong> $(0, \infty)$</li>
+                            <li><strong>Intersección eje $y$:</strong> $(0, 1)$</li>
+                            <li><strong>Asíntota horizontal:</strong> $y = 0$</li>
+                            <li><strong>Monotonía:</strong> Creciente si $a > 1$; Decreciente si $0 < a < 1$.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50/80 p-5 rounded-xl border border-slate-200/60 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider text-brand-700">Ejemplos de Transformaciones</h4>
+                        <ul class="text-xs text-slate-600 space-y-2">
+                            <li><strong>Crecimiento:</strong> $f(x) = 2^x$ (Base mayor que 1).</li>
+                            <li><strong>Decrecimiento:</strong> $g(x) = \left(\frac{1}{2}\right)^x$ (Base entre 0 y 1).</li>
+                            <li><strong>Transformación vertical:</strong> $h(x) = 3 \cdot 2^x$ (Dilatación vertical).</li>
+                            <li><strong>Desplazamiento:</strong> $p(x) = 2^{x-1} + 3$ (Derecha 1, Arriba 3).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Propiedades de los exponentes -->
+                <div class="pt-4 border-t border-slate-100">
+                    <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider text-slate-500 mb-3">Leyes Fundamentales de los Exponentes</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+                        <div class="bg-brand-50/40 p-3 rounded-xl border border-brand-100 text-center font-mono text-slate-800">$a^m \cdot a^n = a^{m+n}$</div>
+                        <div class="bg-brand-50/40 p-3 rounded-xl border border-brand-100 text-center font-mono text-slate-800">$\frac{a^m}{a^n} = a^{m-n} \quad (a \neq 0)$</div>
+                        <div class="bg-brand-50/40 p-3 rounded-xl border border-brand-100 text-center font-mono text-slate-800">$(a^m)^n = a^{mn}$</div>
+                        <div class="bg-brand-50/40 p-3 rounded-xl border border-brand-100 text-center font-mono text-slate-800">$a^0 = 1 \quad (a \neq 0)$</div>
+                        <div class="bg-brand-50/40 p-3 rounded-xl border border-brand-100 text-center font-mono text-slate-800">$a^{-n} = \frac{1}{a^n} \quad (a \neq 0)$</div>
+                    </div>
+                </div>
+
+                <!-- Aplicaciones -->
+                <div class="bg-emerald-50/60 p-4 rounded-xl border border-emerald-200/60 text-xs text-emerald-900 leading-relaxed">
+                    <strong class="text-emerald-950 font-bold">Aplicaciones Reales:</strong> Modelan fenómenos de crecimiento poblacional idealizado, interés compuesto financiero, multiplicación bacteriana bajo recursos ilimitados y desintegración radiactiva (vida media), asumiendo condiciones controladas y evitando extrapolaciones absolutas fuera del dominio temporal válido.
+                </div>
+            </div>
+
+            <!-- B. Funciones Logarítmicas -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow space-y-6">
+                <div class="flex items-center space-x-3">
+                    <span class="w-2.5 h-6 bg-accent-600 rounded-full"></span>
+                    <h3 class="text-lg font-bold text-slate-900 tracking-tight">B. Funciones Logarítmicas</h3>
+                </div>
+                <p class="text-slate-700 text-sm leading-relaxed">
+                    La función logarítmica es la inversa de la función exponencial. Responde a la interrogante: <em>¿A qué exponente se debe elevar la base $a$ para obtener el número $x$?</em>
+                </p>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80 text-center font-mono text-accent-700 math-display text-sm">
+                    $f(x) = \log_a(x) \iff a^y = x, \qquad a > 0, \quad a \neq 1, \quad x > 0$
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-1">
+                    <div class="bg-slate-50/80 p-5 rounded-xl border border-slate-200/60 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider text-accent-700">Características Fundamentales</h4>
+                        <ul class="list-disc list-inside text-xs text-slate-600 space-y-1.5">
+                            <li><strong>Dominio:</strong> $(0, \infty)$ (Argumento estrictamente positivo)</li>
+                            <li><strong>Rango:</strong> $\mathbb{R}$ ($-\infty, \infty$)</li>
+                            <li><strong>Intersección eje $x$:</strong> $(1, 0)$</li>
+                            <li><strong>Asíntota vertical:</strong> $x = 0$</li>
+                            <li><strong>Monotonía:</strong> Creciente si $a > 1$; Decreciente si $0 < a < 1$.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50/80 p-5 rounded-xl border border-slate-200/60 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider text-accent-700">Ejemplos y Bases Comunes</h4>
+                        <ul class="text-xs text-slate-600 space-y-2">
+                            <li><strong>Binaria:</strong> $f(x) = \log_2(x)$</li>
+                            <li><strong>Decimal:</strong> $g(x) = \log_{10}(x)$ (o $\log(x)$)</li>
+                            <li><strong>Natural o Neperiana:</strong> $h(x) = \ln(x) = \log_e(x)$</li>
+                            <li><strong>Desplazada:</strong> $p(x) = \log_2(x-3) + 1$ (Dominio: $x > 3$).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Propiedades de los logaritmos -->
+                <div class="pt-4 border-t border-slate-100 space-y-3">
+                    <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider text-slate-500">Propiedades Algebraicas Clave</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/70"><strong>Producto:</strong> $\log_a(MN) = \log_a(M) + \log_a(N)$</div>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/70"><strong>Cociente:</strong> $\log_a\left(\frac{M}{N}\right) = \log_a(M) - \log_a(N)$</div>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/70"><strong>Potencia:</strong> $\log_a(M^r) = r \cdot \log_a(M)$</div>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/70"><strong>Cambio de base:</strong> $\log_a(M) = \frac{\log_b(M)}{\log_b(a)}$</div>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/70"><strong>Identidad 1:</strong> $\log_a(a^x) = x$</div>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/70"><strong>Identidad 2:</strong> $a^{\log_a(x)} = x \quad (x > 0)$</div>
+                    </div>
+                </div>
+
+                <!-- Errores comunes -->
+                <div class="bg-rose-50/70 p-4 rounded-xl border border-rose-200/80 text-xs text-rose-900 space-y-2">
+                    <h5 class="font-bold flex items-center space-x-2">
+                        <svg class="w-4 h-4 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        <span>Errores Conceptuales Comunes a Evitar</span>
+                    </h5>
+                    <ul class="list-disc list-inside space-y-1 text-rose-800">
+                        <li>Confundir $\log_a(x+y)$ con la suma de logaritmos $\log_a(x) + \log_a(y)$.</li>
+                        <li>Evaluar argumentos negativos o nulos ($x \le 0$).</li>
+                        <li>Confundir el rol de la base y el argumento.</li>
+                        <li>Olvidar comprobar las soluciones obtenidas en ecuaciones logarítmicas dentro de la expresión original para descartar raíces extrañas.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- C. Relación entre funciones exponenciales y logarítmicas -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow space-y-3">
+                <div class="flex items-center space-x-3">
+                    <span class="w-2.5 h-6 bg-slate-800 rounded-full"></span>
+                    <h3 class="text-lg font-bold text-slate-900 tracking-tight">C. Relación de Inversión y Simetría</h3>
+                </div>
+                <p class="text-slate-700 text-sm leading-relaxed">
+                    Dada una función exponencial $f(x) = a^x$, su función inversa es $f^{-1}(x) = \log_a(x)$. Gráficamente, esto implica una <strong>perfecta simetría respecto a la recta identidad $y = x$</strong>. El dominio de la exponencial se convierte en el rango de la logarítmica, y viceversa, intercambiando las coordenadas $(x, y)$ por $(y, x)$.
+                </p>
+            </div>
+
+            <!-- D. Ecuaciones Exponenciales y Logarítmicas -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow space-y-6">
+                <div class="flex items-center space-x-3">
+                    <span class="w-2.5 h-6 bg-brand-600 rounded-full"></span>
+                    <h3 class="text-lg font-bold text-slate-900 tracking-tight">D. Metodología de Resolución de Ecuaciones</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-50/80 p-5 rounded-xl border border-slate-200/60 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm">Ecuaciones Exponenciales</h4>
+                        <p class="text-xs text-slate-600"><strong>Método 1 (Bases Iguales):</strong> Igualar exponentes si $a^u = a^v \implies u = v$.</p>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200 text-xs font-mono text-slate-800">
+                            Ej: $2^{x+1} = 16 \implies 2^{x+1} = 2^4 \implies x+1=4 \implies x=3$
+                        </div>
+                        <p class="text-xs text-slate-600 mt-2"><strong>Método 2 (Logaritmos):</strong> Aplicar logaritmos naturales cuando las bases no coinciden.</p>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200 text-xs font-mono text-slate-800">
+                            Ej: $3^x = 10 \implies x = \frac{\ln(10)}{\ln(3)}$
+                        </div>
+                    </div>
+                    <div class="bg-slate-50/80 p-5 rounded-xl border border-slate-200/60 space-y-3">
+                        <h4 class="font-bold text-slate-900 text-sm">Ecuaciones Logarítmicas</h4>
+                        <p class="text-xs text-slate-600"><strong>Método de Conversión:</strong> Aislar el logaritmo y convertirlo a su forma exponencial equivalente.</p>
+                        <div class="bg-white p-3 rounded-lg border border-slate-200 text-xs font-mono text-slate-800">
+                            Ej: $\log_2(x-1) = 3 \implies x-1 = 2^3 = 8 \implies x = 9$
+                        </div>
+                        <p class="text-xs text-amber-800 bg-amber-50 p-2.5 rounded-lg border border-amber-200/70">
+                            <strong>Nota obligatoria:</strong> Comprobar siempre que el valor de $x$ satisfaga estrictamente la restricción del dominio inicial ($x - 1 > 0$).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: METODOLOGÍA COMPARADA E INTERACTIVIDAD -->
+        <section id="metodologia" class="space-y-10">
+            <div class="border-b border-slate-200/80 pb-5">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200/60 mb-2">Sección Académica II</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Metodología Comparada e Interactividad</h2>
+                <p class="text-slate-600 text-sm mt-1.5 max-w-3xl leading-relaxed">Analiza las diferencias clave mediante nuestra matriz comparativa y experimenta directamente con los simuladores matemáticos integrados.</p>
+            </div>
+
+            <!-- A. Cuadro Comparativo -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+                <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
+                    <h3 class="font-bold text-sm tracking-wide">Cuadro Comparativo: Funciones Exponenciales vs. Logarítmicas</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                        <thead>
+                            <tr class="bg-slate-50 text-slate-700 border-b border-slate-200">
+                                <th class="p-4 font-bold uppercase tracking-wider text-[11px] text-slate-500">Criterio</th>
+                                <th class="p-4 font-bold uppercase tracking-wider text-[11px] text-brand-700">Función Exponencial</th>
+                                <th class="p-4 font-bold uppercase tracking-wider text-[11px] text-accent-700">Función Logarítmica</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200/70 text-slate-600">
+                            <tr>
+                                <td class="p-4 font-semibold text-slate-900">Forma Básica</td>
+                                <td class="p-4 font-mono">$f(x) = a^x$</td>
+                                <td class="p-4 font-mono">$g(x) = \log_a(x)$</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="p-4 font-semibold text-slate-900">Condición de la Base</td>
+                                <td class="p-4">$a > 0, \quad a \neq 1$</td>
+                                <td class="p-4">$a > 0, \quad a \neq 1$</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-slate-900">Dominio</td>
+                                <td class="p-4 font-mono">$\mathbb{R}$ ($-\infty, \infty$)</td>
+                                <td class="p-4 font-mono">$(0, \infty)$</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="p-4 font-semibold text-slate-900">Rango</td>
+                                <td class="p-4 font-mono">$(0, \infty)$</td>
+                                <td class="p-4 font-mono">$\mathbb{R}$ ($-\infty, \infty$)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-slate-900">Intersección Principal</td>
+                                <td class="p-4">$(0, 1)$ en el eje $y$</td>
+                                <td class="p-4">$(1, 0)$ en el eje $x$</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="p-4 font-semibold text-slate-900">Asíntota</td>
+                                <td class="p-4">Horizontal: $y = 0$</td>
+                                <td class="p-4">Vertical: $x = 0$</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold text-slate-900">Monotonía ($a > 1$)</td>
+                                <td class="p-4 text-emerald-600 font-bold">Estrictamente Creciente</td>
+                                <td class="p-4 text-emerald-600 font-bold">Estrictamente Creciente</td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="p-4 font-semibold text-slate-900">Relación Mutua</td>
+                                <td colspan="2" class="p-4 text-center font-bold text-brand-700">Funciones Inversas (Simétricas respecto a $y = x$)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- B. Simulador Interactivo Educativo -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-4 border-b border-slate-200 gap-4">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">Laboratorio Gráfico Interactivo</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Simulador dinámico de funciones exponenciales, logarítmicas y transformaciones.</p>
+                    </div>
+                    <!-- Pestañas del Simulador -->
+                    <div class="flex flex-wrap gap-1.5 bg-slate-100 p-1.5 rounded-xl border border-slate-200/60">
+                        <button onclick="setSimMode('exp')" id="tabExp" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-brand-600 text-white shadow-sm transition-all">Exponencial</button>
+                        <button onclick="setSimMode('log')" id="tabLog" class="px-3 py-1.5 text-xs font-bold rounded-lg text-slate-600 hover:text-slate-900 transition-all">Logarítmica</button>
+                        <button onclick="setSimMode('inv')" id="tabInv" class="px-3 py-1.5 text-xs font-bold rounded-lg text-slate-600 hover:text-slate-900 transition-all">Inversas & Simetría</button>
+                    </div>
+                </div>
+
+                <!-- Panel de Controles y Canvas -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                    <!-- Controles -->
+                    <div class="bg-slate-50/90 p-5 rounded-2xl border border-slate-200/80 space-y-5">
+                        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider" id="controlsTitle">Parámetros Exponenciales</h4>
+                        
+                        <div class="space-y-1.5">
+                            <label class="text-xs font-semibold text-slate-700 flex justify-between">
+                                <span>Base ($a$):</span>
+                                <span id="baseVal" class="font-bold text-brand-600 font-mono">2.0</span>
+                            </label>
+                            <input type="range" id="baseRange" min="0.2" max="5.0" step="0.1" value="2.0" class="w-full accent-brand-600 cursor-pointer" oninput="updateSimulation()">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-xs font-semibold text-slate-700 flex justify-between">
+                                <span>Desplazamiento Horizontal ($h$):</span>
+                                <span id="hVal" class="font-bold text-brand-600 font-mono">0</span>
+                            </label>
+                            <input type="range" id="hRange" min="-3" max="3" step="1" value="0" class="w-full accent-brand-600 cursor-pointer" oninput="updateSimulation()">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-xs font-semibold text-slate-700 flex justify-between">
+                                <span>Desplazamiento Vertical ($k$):</span>
+                                <span id="kVal" class="font-bold text-brand-600 font-mono">0</span>
+                            </label>
+                            <input type="range" id="kRange" min="-3" max="3" step="1" value="0" class="w-full accent-brand-600 cursor-pointer" oninput="updateSimulation()">
+                        </div>
+
+                        <div class="bg-white p-3.5 rounded-xl border border-slate-200/80 space-y-1 text-xs text-slate-600 shadow-sm">
+                            <p><strong>Función Activa:</strong> <span id="simFuncText" class="font-mono text-brand-700 font-bold">$f(x) = 2^x$</span></p>
+                            <p><strong>Dominio:</strong> <span id="simDomText" class="font-mono">$(- \infty, \infty)$</span></p>
+                            <p><strong>Rango:</strong> <span id="simRanText" class="font-mono">$(0, \infty)$</span></p>
+                            <p><strong>Asíntota:</strong> <span id="simAsyText" class="font-mono">$y = 0$</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Canvas Gráfico -->
+                    <div class="lg:col-span-2 bg-slate-950 rounded-2xl p-4 flex flex-col items-center justify-center relative shadow-inner border border-slate-800">
+                        <canvas id="mathCanvas" width="600" height="400" class="w-full h-auto max-w-full bg-slate-950 rounded-xl"></canvas>
+                        <div class="absolute bottom-6 left-6 text-[11px] font-medium text-slate-400 bg-slate-900/90 px-3 py-1 rounded-lg backdrop-blur border border-slate-800">
+                            Plano Cartesiano Dinámico (Ejes $X$ e $Y$)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: EJERCICIO PRÁCTICO RESUELTO -->
+        <section id="ejercicios" class="space-y-10">
+            <div class="border-b border-slate-200/80 pb-5">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200/60 mb-2">Sección Académica III</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Ejercicios Prácticos Resueltos y Práctica Interactiva</h2>
+                <p class="text-slate-600 text-sm mt-1.5 max-w-3xl leading-relaxed">Desglose analítico paso a paso de problemas avanzados y banco de autoevaluación interactiva.</p>
+            </div>
+
+            <!-- Problemas Resueltos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Problema A -->
+                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow space-y-4">
+                    <span class="inline-block bg-brand-50 text-brand-700 text-xs font-bold px-3 py-1 rounded-full border border-brand-200/60">Problema Exponencial</span>
+                    <h3 class="text-base font-bold text-slate-900">Análisis de la función $f(x) = 2^{x-1} + 1$</h3>
+                    
+                    <div class="space-y-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        <p><strong>Paso 1 (Transformaciones):</strong> La base es $g(x) = 2^x$. El término $x-1$ desplaza la gráfica 1 unidad a la derecha, y el $+1$ final la desplaza 1 unidad hacia arriba.</p>
+                        <p><strong>Paso 2 (Dominio):</strong> Al ser exponencial en el exponente, su dominio es $D_f = \mathbb{R}$.</p>
+                        <p><strong>Paso 3 (Rango):</strong> Como $2^{x-1} > 0$, sumando 1 obtenemos $R_f = (1, \infty)$.</p>
+                        <p><strong>Paso 4 (Asíntota Horizontal):</strong> Cuando $x \to -\infty$, $2^{x-1} \to 0$, por lo que la asíntota es $y = 1$.</p>
+                        <p><strong>Paso 5 (Intersección eje $y$):</strong> Evaluando en $x=0$: $f(0) = 2^{-1} + 1 = \frac{1}{2} + 1 = \frac{3}{2} = (0, 1.5)$.</p>
+                        <p><strong>Paso 6 (Comportamiento):</strong> Es estrictamente creciente pues la base $a = 2 > 1$.</p>
+                    </div>
+                </div>
+
+                <!-- Problema B -->
+                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow space-y-4">
+                    <span class="inline-block bg-accent-50 text-accent-700 text-xs font-bold px-3 py-1 rounded-full border border-accent-200/60">Problema Logarítmico</span>
+                    <h3 class="text-base font-bold text-slate-900">Análisis de la función $g(x) = \log_2(x-1) + 2$</h3>
+                    
+                    <div class="space-y-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        <p><strong>Paso 1 (Dominio):</strong> Exigimos que el argumento sea positivo: $x - 1 > 0 \implies x > 1$. Por ende, $D_g = (1, \infty)$.</p>
+                        <p><strong>Paso 2 (Rango):</strong> Las funciones logarítmicas abarcan todo el conjunto real: $R_g = \mathbb{R}$.</p>
+                        <p><strong>Paso 3 (Asíntota Vertical):</strong> Ocurre en la frontera del dominio: $x - 1 = 0 \implies x = 1$.</p>
+                        <p><strong>Paso 4 (Intersección eje $x$):</strong> Igualando $g(x) = 0$:<br>
+                        $\log_2(x-1) + 2 = 0 \implies \log_2(x-1) = -2$<br>
+                        Forma exponencial: $x-1 = 2^{-2} = \frac{1}{4} \implies x = \frac{5}{4} = (1.25, 0)$.</p>
+                        <p><strong>Paso 5 (Transformaciones):</strong> Desplazamiento de 1 unidad a la derecha y 2 unidades hacia arriba respecto a $\log_2(x)$.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejercicios Interactivos Adicionales -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-slate-200">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">Banco de Práctica Interactiva</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Pon a prueba tus conocimientos con validación algebraica automática en tiempo real.</p>
+                    </div>
+                    <div class="text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200/80 px-4 py-2 rounded-xl">
+                        Puntuación: <span id="scoreDisplay" class="font-extrabold">0</span> / 4
+                    </div>
+                </div>
+
+                <div id="quizContainer" class="space-y-6">
+                    <!-- Pregunta 1 -->
+                    <div class="bg-slate-50/80 p-5 sm:p-6 rounded-2xl border border-slate-200/70 space-y-4" id="q1">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Nivel Básico • Evaluación Exponencial</span>
+                            <span class="qstatus text-xs font-bold text-slate-400">Pendiente</span>
+                        </div>
+                        <p class="font-medium text-slate-900 text-sm">1. Evalúa la función $f(x) = 3^{x-1}$ cuando $x = 3$. ¿Cuál es el valor resultante?</p>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <input type="number" id="ans1" placeholder="Tu respuesta..." class="bg-white border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all font-mono">
+                            <button onclick="checkAnswer(1, 9)" class="bg-slate-900 hover:bg-brand-600 text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition-all shadow-sm">Comprobar</button>
+                        </div>
+                        <p class="feedback text-xs hidden font-semibold"></p>
+                    </div>
+
+                    <!-- Pregunta 2 -->
+                    <div class="bg-slate-50/80 p-5 sm:p-6 rounded-2xl border border-slate-200/70 space-y-4" id="q2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Nivel Intermedio • Propiedades Logarítmicas</span>
+                            <span class="qstatus text-xs font-bold text-slate-400">Pendiente</span>
+                        </div>
+                        <p class="font-medium text-slate-900 text-sm">2. Simplifica la expresión $\log_2(8) + \log_2(4)$. ¿Cuál es el valor numérico entero?</p>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <input type="number" id="ans2" placeholder="Tu respuesta..." class="bg-white border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all font-mono">
+                            <button onclick="checkAnswer(2, 5)" class="bg-slate-900 hover:bg-brand-600 text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition-all shadow-sm">Comprobar</button>
+                        </div>
+                        <p class="feedback text-xs hidden font-semibold"></p>
+                    </div>
+
+                    <!-- Pregunta 3 -->
+                    <div class="bg-slate-50/80 p-5 sm:p-6 rounded-2xl border border-slate-200/70 space-y-4" id="q3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Nivel Intermedio-Avanzado • Ecuación Exponencial</span>
+                            <span class="qstatus text-xs font-bold text-slate-400">Pendiente</span>
+                        </div>
+                        <p class="font-medium text-slate-900 text-sm">3. Resuelve la ecuación exponencial $2^{x+1} = 32$. ¿Cuál es el valor de $x$?</p>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <input type="number" id="ans3" placeholder="Tu respuesta..." class="bg-white border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all font-mono">
+                            <button onclick="checkAnswer(3, 4)" class="bg-slate-900 hover:bg-brand-600 text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition-all shadow-sm">Comprobar</button>
+                        </div>
+                        <p class="feedback text-xs hidden font-semibold"></p>
+                    </div>
+
+                    <!-- Pregunta 4 -->
+                    <div class="bg-slate-50/80 p-5 sm:p-6 rounded-2xl border border-slate-200/70 space-y-4" id="q4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Nivel Avanzado • Ecuación Logarítmica</span>
+                            <span class="qstatus text-xs font-bold text-slate-400">Pendiente</span>
+                        </div>
+                        <p class="font-medium text-slate-900 text-sm">4. Resuelve la ecuación logarítmica $\log_3(x-2) = 2$. ¿Cuál es el valor de $x$?</p>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <input type="number" id="ans4" placeholder="Tu respuesta..." class="bg-white border border-slate-300 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all font-mono">
+                            <button onclick="checkAnswer(4, 11)" class="bg-slate-900 hover:bg-brand-600 text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition-all shadow-sm">Comprobar</button>
+                        </div>
+                        <p class="feedback text-xs hidden font-semibold"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: CONCLUSIONES Y BIBLIOGRAFÍA ACADÉMICA -->
+        <section id="conclusiones" class="space-y-10 pb-6">
+            <div class="border-b border-slate-200/80 pb-5">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200/60 mb-2">Sección Académica IV</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Conclusiones y Bibliografía Académica</h2>
+                <p class="text-slate-600 text-sm mt-1.5 max-w-3xl leading-relaxed">Síntesis conceptual y fuentes bibliográficas oficiales del estudio.</p>
+            </div>
+
+            <!-- Conclusiones -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow space-y-6">
+                <h3 class="text-lg font-bold text-slate-900">Conclusiones Académicas</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-700">
+                    <div class="bg-slate-50/80 p-5 rounded-2xl border border-slate-200/60 space-y-1.5">
+                        <span class="text-brand-600 font-extrabold text-sm font-mono">01.</span>
+                        <h4 class="font-bold text-slate-900">Modelación de Crecimiento</h4>
+                        <p class="text-slate-600">Las funciones exponenciales son herramientas matemáticas fundamentales para modelar fenómenos reales de crecimiento y decrecimiento acelerado (como poblaciones y desintegración).</p>
+                    </div>
+                    <div class="bg-slate-50/80 p-5 rounded-2xl border border-slate-200/60 space-y-1.5">
+                        <span class="text-brand-600 font-extrabold text-sm font-mono">02.</span>
+                        <h4 class="font-bold text-slate-900">Inversión y Resolución</h4>
+                        <p class="text-slate-600">Los logaritmos actúan como la operación inversa esencial para despejar variables en exponentes, permitiendo resolver ecuaciones complejas del cálculo científico.</p>
+                    </div>
+                    <div class="bg-slate-50/80 p-5 rounded-2xl border border-slate-200/60 space-y-1.5">
+                        <span class="text-brand-600 font-extrabold text-sm font-mono">03.</span>
+                        <h4 class="font-bold text-slate-900">Simetría y Dominio</h4>
+                        <p class="text-slate-600">Ambas familias guardan una relación estricta de inversión simétrica respecto a la recta $y=x$, reflejando el intercambio perfecto entre sus dominios y rangos.</p>
+                    </div>
+                    <div class="bg-slate-50/80 p-5 rounded-2xl border border-slate-200/60 space-y-1.5">
+                        <span class="text-brand-600 font-extrabold text-sm font-mono">04.</span>
+                        <h4 class="font-bold text-slate-900">Rigor Algebraico</h4>
+                        <p class="text-slate-600">Comprender las restricciones de dominio, bases válidas y transformaciones gráficas previene errores conceptuales críticos en análisis matemático.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bibliografía Académica -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 hover:shadow-md transition-shadow space-y-4">
+                <h3 class="text-lg font-bold text-slate-900">Bibliografía Académica Verificada</h3>
+                <ul class="space-y-3 text-xs sm:text-sm text-slate-700">
+                    <li class="p-4 bg-slate-50/80 rounded-xl border border-slate-200/60">
+                        <strong>OpenStax.</strong> (2022). <em>Precalculus 2e</em>. Rice University. Disponible en: <a href="https://openstax.org/details/books/precalculus-2e" target="_blank" class="text-brand-600 hover:underline font-semibold">https://openstax.org/details/books/precalculus-2e</a>
+                    </li>
+                    <li class="p-4 bg-slate-50/80 rounded-xl border border-slate-200/60">
+                        <strong>OpenStax.</strong> (2022). <em>Algebra and Trigonometry 2e</em>. Rice University. Disponible en: <a href="https://openstax.org/details/books/algebra-and-trigonometry-2e" target="_blank" class="text-brand-600 hover:underline font-semibold">https://openstax.org/details/books/algebra-and-trigonometry-2e</a>
+                    </li>
+                    <li class="p-4 bg-slate-50/80 rounded-xl border border-slate-200/60">
+                        <strong>Stewart, J., Redlin, L., y Watson, S.</strong> (2016). <em>Precalculus: Mathematics for Calculus</em> (7th ed.). Cengage Learning.
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200/80 py-6 text-center text-xs font-medium text-slate-500">
+        <p>&copy; 2026 Portal Académico de Matemáticas y Desarrollo Educativo. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- INTERACTIVE SIMULATOR & QUIZ SCRIPT -->
+    <script>
+        let currentMode = 'exp'; // 'exp', 'log', 'inv'
+        let answeredQuestions = {};
+        let score = 0;
+
+        function setSimMode(mode) {
+            currentMode = mode;
+            ['exp', 'log', 'inv'].forEach(m => {
+                const btn = document.getElementById('tab' + m.charAt(0).toUpperCase() + m.slice(1));
+                if (m === mode) {
+                    btn.className = "px-3 py-1.5 text-xs font-bold rounded-lg bg-brand-600 text-white shadow-sm transition-all";
+                } else {
+                    btn.className = "px-3 py-1.5 text-xs font-bold rounded-lg text-slate-600 hover:text-slate-900 transition-all";
+                }
+            });
+
+            const title = document.getElementById('controlsTitle');
+            if (mode === 'exp') title.textContent = "Parámetros Exponenciales";
+            if (mode === 'log') title.textContent = "Parámetros Logarítmicos";
+            if (mode === 'inv') title.textContent = "Comparador de Inversas";
+
+            updateSimulation();
+        }
+
+        function updateSimulation() {
+            const base = parseFloat(document.getElementById('baseRange').value);
+            const h = parseInt(document.getElementById('hRange').value);
+            const k = parseInt(document.getElementById('kRange').value);
+
+            document.getElementById('baseVal').textContent = base.toFixed(1);
+            document.getElementById('hVal').textContent = h;
+            document.getElementById('kVal').textContent = k;
+
+            const funcText = document.getElementById('simFuncText');
+            const domText = document.getElementById('simDomText');
+            const ranText = document.getElementById('simRanText');
+            const asyText = document.getElementById('simAsyText');
+
+            if (currentMode === 'exp') {
+                funcText.textContent = `$f(x) = ${base.toFixed(1)}^{x${h>=0?'-'+h:'+'+Math.abs(h)}} ${k>=0?'+'+k:k}$`;
+                domText.textContent = "$(-\\infty, \\infty)$";
+                ranText.textContent = k === 0 ? "$(0, \\infty)$" : `(${k}, \\infty)$`;
+                asyText.textContent = `$y = ${k}$`;
+            } else if (currentMode === 'log') {
+                funcText.textContent = `$g(x) = \\log_{${base.toFixed(1)}}(x${h>=0?'-'+h:'+'+Math.abs(h)}}) ${k>=0?'+'+k:k}$`;
+                domText.textContent = `(${h}, \\infty)$`;
+                ranText.textContent = "$(-\\infty, \\infty)$";
+                asyText.textContent = `$x = ${h}$`;
+            } else {
+                funcText.textContent = `$f(x) = ${base.toFixed(1)}^x \quad \text{vs} \quad f^{-1}(x) = \\log_{${base.toFixed(1)}}(x)$`;
+                domText.textContent = "Exp: $\\mathbb{R}$ | Log: $(0, \\infty)$";
+                ranText.textContent = "Exp: $(0, \\infty)$ | Log: $\\mathbb{R}$";
+                asyText.textContent = "Exp: $y=0$ | Log: $x=0$";
+            }
+
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+
+            drawCanvas(base, h, k);
+        }
+
+        function drawCanvas(base, h, k) {
+            const canvas = document.getElementById('mathCanvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+
+            ctx.clearRect(0, 0, width, height);
+
+            // Grid & Axes
+            ctx.strokeStyle = '#1e293b';
+            ctx.lineWidth = 1;
+
+            const originX = width / 2;
+            const originY = height / 2;
+            const scale = 30; // pixels per unit
+
+            // Draw grid lines
+            for (let x = 0; x < width; x += scale) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke();
+            }
+            for (let y = 0; y < height; y += scale) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke();
+            }
+
+            // Draw principal axes
+            ctx.strokeStyle = '#475569';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, originY); ctx.lineTo(width, originY); // X axis
+            ctx.moveTo(originX, 0); ctx.lineTo(originX, height); // Y axis
+            ctx.stroke();
+
+            if (currentMode === 'exp' || currentMode === 'inv') {
+                // Draw Exponential Function
+                ctx.strokeStyle = '#0284c7';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                let first = true;
+                for (let px = 0; px < width; px += 2) {
+                    let x = (px - originX) / scale;
+                    let ex = x - h;
+                    let y = Math.pow(base, ex) + k;
+                    let py = originY - y * scale;
+                    if (first) { ctx.moveTo(px, py); first = false; }
+                    else { ctx.lineTo(px, py); }
+                }
+                ctx.stroke();
+            }
+
+            if (currentMode === 'log' || currentMode === 'inv') {
+                // Draw Logarithmic Function
+                ctx.strokeStyle = '#10b981';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                let first = true;
+                for (let px = 0; px < width; px += 2) {
+                    let x = (px - originX) / scale;
+                    let arg = x - h;
+                    if (arg > 0) {
+                        let y = Math.log(arg) / Math.log(base) + k;
+                        let py = originY - y * scale;
+                        if (first) { ctx.moveTo(px, py); first = false; }
+                        else { ctx.lineTo(px, py); }
+                    } else {
+                        first = true;
+                    }
+                }
+                ctx.stroke();
+            }
+
+            if (currentMode === 'inv') {
+                // Draw Identity Line y = x
+                ctx.strokeStyle = '#cbd5e1';
+                ctx.lineWidth = 1.5;
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                ctx.moveTo(0, height); ctx.lineTo(width, 0);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+        }
+
+        function checkAnswer(qNum, correctVal) {
+            if (answeredQuestions[qNum]) return;
+            const input = document.getElementById('ans' + qNum);
+            const val = parseFloat(input.value);
+            const qBox = document.getElementById('q' + qNum);
+            const feedback = qBox.querySelector('.feedback');
+            const status = qBox.querySelector('.qstatus');
+
+            feedback.classList.remove('hidden');
+            if (!isNaN(val) && val === correctVal) {
+                feedback.textContent = "¡Respuesta correcta! Validación matemática aprobada.";
+                feedback.className = "feedback text-xs font-semibold text-emerald-600";
+                status.textContent = "¡Correcto!";
+                status.className = "qstatus text-xs font-bold text-emerald-600";
+                qBox.className = "bg-emerald-50/50 p-5 sm:p-6 rounded-2xl border border-emerald-200/80 space-y-4 transition-all";
+                answeredQuestions[qNum] = true;
+                score++;
+            } else {
+                feedback.textContent = "Respuesta incorrecta o valor inválido. Verifica tus cálculos y restricciones de dominio.";
+                feedback.className = "feedback text-xs font-semibold text-rose-600";
+                status.textContent = "Incorrecto";
+                status.className = "qstatus text-xs font-bold text-rose-600";
+                qBox.className = "bg-rose-50/50 p-5 sm:p-6 rounded-2xl border border-rose-200/80 space-y-4 transition-all";
+            }
+            document.getElementById('scoreDisplay').textContent = score;
+        }
+
+        // Initialize Canvas on Load
+        window.onload = function() {
+            updateSimulation();
+        };
+    </script>
+</body>
+</html>

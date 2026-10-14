@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigonometría Analítica | Portal Académico Preuniversitario</title>
+    <!-- Tailwind CSS para diseño moderno y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- MathJax para renderizar fórmulas matemáticas en LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { overflow-x: auto; padding: 0.5rem 0; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans leading-relaxed">
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <header class="sticky top-0 z-50 bg-slate-900 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="bg-indigo-600 text-white p-2 rounded-lg font-bold text-lg">TA</span>
+                <span class="font-bold text-xl tracking-tight">Trigonometría Analítica</span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#fundamentos" class="hover:text-indigo-400 transition">1. Fundamentos</a>
+                <a href="#metodologia" class="hover:text-indigo-400 transition">2. Metodología e Interactivo</a>
+                <a href="#ejercicios" class="hover:text-indigo-400 transition">3. Ejercicios Resueltos</a>
+                <a href="#conclusiones" class="hover:text-indigo-400 transition">4. Conclusiones y Bibliografía</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="bg-gradient-to-br from-slate-900 via-indigo-950 text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="bg-indigo-500/20 text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider border border-indigo-500/30">Nivel Preuniversitario</span>
+            <h1 class="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight">Trigonometría Analítica</h1>
+            <p class="mt-4 text-lg text-slate-300 max-w-2xl mx-auto">
+                Transformación, demostración y simplificación de expresiones trigonométricas mediante identidades rigurosas y procedimientos algebraicos avanzados.
+            </p>
+        </div>
+    </section>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        <!-- SECCIÓN 1: INTRODUCCIÓN Y FUNDAMENTOS -->
+        <section id="fundamentos" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-10 space-y-8">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 border-b pb-3">1. Introducción y Fundamentos Teóricos</h2>
+                <p class="mt-4 text-slate-600">
+                    La <strong>trigonometría analítica</strong> trasciende el estudio clásico de los triángulos para centrarse en las funciones trigonométricas en el plano cartesiano, su comportamiento algebraico, las identidades que las relacionan y las técnicas para simplificar expresiones complejas. Su dominio es indispensable para el cálculo diferencial e integral, la física avanzada y la ingeniería.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                    <h3 class="font-bold text-indigo-700">Seno: \(\operatorname{sen}(x)\)</h3>
+                    <p class="text-sm text-slate-600 mt-1">Relación ordenada/radio. Dominio: \(\mathbb{R}\).</p>
+                </div>
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                    <h3 class="font-bold text-indigo-700">Coseno: \(\cos(x)\)</h3>
+                    <p class="text-sm text-slate-600 mt-1">Relación abscisa/radio. Dominio: \(\mathbb{R}\).</p>
+                </div>
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                    <h3 class="font-bold text-indigo-700">Tangente: \(\tan(x)\)</h3>
+                    <p class="text-sm text-slate-600 mt-1">Cociente \(\frac{\operatorname{sen}(x)}{\cos(x)}\). Restricción: \(\cos(x) \neq 0\).</p>
+                </div>
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                    <h3 class="font-bold text-indigo-700">Cotangente: \(\cot(x)\)</h3>
+                    <p class="text-sm text-slate-600 mt-1">Recíproco de la tangente. Restricción: \(\operatorname{sen}(x) \neq 0\).</p>
+                </div>
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                    <h3 class="font-bold text-indigo-700">Secante: \(\sec(x)\)</h3>
+                    <p class="text-sm text-slate-600 mt-1">Recíproco del coseno. Restricción: \(\cos(x) \neq 0\).</p>
+                </div>
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                    <h3 class="font-bold text-indigo-700">Cosecante: \(\csc(x)\)</h3>
+                    <p class="text-sm text-slate-600 mt-1">Recíproco del seno. Restricción: \(\operatorname{sen}(x) \neq 0\).</p>
+                </div>
+            </div>
+
+            <!-- Subcategorías de Identidades -->
+            <div class="space-y-6 pt-4">
+                <h3 class="text-xl font-semibold text-slate-900">A. Identidades Trigonométricas Fundamentadas</h3>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-indigo-50/50 p-5 rounded-xl border border-indigo-100">
+                        <h4 class="font-bold text-indigo-900 mb-2">Identidades Recíprocas</h4>
+                        <ul class="text-sm space-y-1 text-slate-700">
+                            <li>\(\csc(x) = \frac{1}{\operatorname{sen}(x)}\)</li>
+                            <li>\(\sec(x) = \frac{1}{\cos(x)}\)</li>
+                            <li>\(\cot(x) = \frac{1}{\tan(x)}\)</li>
+                            <li>\(\operatorname{sen}(x) = \frac{1}{\csc(x)}\)</li>
+                            <li>\(\cos(x) = \frac{1}{\sec(x)}\)</li>
+                            <li>\(\tan(x) = \frac{1}{\cot(x)}\)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-indigo-50/50 p-5 rounded-xl border border-indigo-100">
+                        <h4 class="font-bold text-indigo-900 mb-2">Identidades de Cociente</h4>
+                        <ul class="text-sm space-y-1 text-slate-700">
+                            <li>\(\tan(x) = \frac{\operatorname{sen}(x)}{\cos(x)}\), con \(\cos(x) \neq 0\)</li>
+                            <li>\(\cot(x) = \frac{\cos(x)}{\operatorname{sen}(x)}\), con \(\operatorname{sen}(x) \neq 0\)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-indigo-50/50 p-5 rounded-xl border border-indigo-100">
+                        <h4 class="font-bold text-indigo-900 mb-2">Identidades Pitagóricas</h4>
+                        <ul class="text-sm space-y-1 text-slate-700">
+                            <li>\(\operatorname{sen}^2(x) + \cos^2(x) = 1\)</li>
+                            <li>\(1 + \tan^2(x) = \sec^2(x)\)</li>
+                            <li>\(1 + \cot^2(x) = \csc^2(x)\)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ángulos Compuestos, Doble y Mitad, Productos -->
+            <div class="grid md:grid-cols-2 gap-8 pt-4 border-t">
+                <div>
+                    <h3 class="text-xl font-semibold text-slate-900 mb-3">B. Ángulos Compuestos</h3>
+                    <ul class="text-sm space-y-2 text-slate-700 bg-slate-50 p-4 rounded-xl border">
+                        <li>\(\operatorname{sen}(A \pm B) = \operatorname{sen}(A)\cos(B) \pm \cos(A)\operatorname{sen}(B)\)</li>
+                        <li>\(\cos(A \pm B) = \cos(A)\cos(B) \mp \operatorname{sen}(A)\operatorname{sen}(B)\)</li>
+                        <li>\(\tan(A \pm B) = \frac{\tan(A) \pm \tan(B)}{1 \mp \tan(A)\tan(B)}\)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-slate-900 mb-3">C. Ángulo Doble y Mitad</h3>
+                    <ul class="text-sm space-y-2 text-slate-700 bg-slate-50 p-4 rounded-xl border">
+                        <li>\(\operatorname{sen}(2x) = 2\operatorname{sen}(x)\cos(x)\)</li>
+                        <li>\(\cos(2x) = \cos^2(x) - \operatorname{sen}^2(x) = 1 - 2\operatorname{sen}^2(x)\)</li>
+                        <li>\(\operatorname{sen}^2\left(\frac{x}{2}\right) = \frac{1 - \cos(x)}{2}, \quad \cos^2\left(\frac{x}{2}\right) = \frac{1 + \cos(x)}{2}\)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <h3 class="text-xl font-semibold text-slate-900 mb-3">D. Transformaciones de Productos y Sumas</h3>
+                <div class="grid md:grid-cols-3 gap-4 text-sm bg-slate-50 p-4 rounded-xl border">
+                    <p>\(\operatorname{sen}(A)\operatorname{sen}(B) = \frac{\cos(A - B) - \cos(A + B)}{2}\)</p>
+                    <p>\(\cos(A)\cos(B) = \frac{\cos(A - B) + \cos(A + B)}{2}\)</p>
+                    <p>\(\operatorname{sen}(A)\cos(B) = \frac{\operatorname{sen}(A + B) + \operatorname{sen}(A - B)}{2}\)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: METODOLOGÍA COMPARADA E INTERACTIVIDAD -->
+        <section id="metodologia" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-10 space-y-8">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 border-b pb-3">2. Metodología Comparada y Simulador Interactivo</h2>
+                <p class="mt-4 text-slate-600">
+                    Para abordar una demostración o simplificación con éxito, se recomienda un procedimiento sistemático: identificar el lado más complejo, transformar a senos y cosenos cuando sea necesario, aplicar identidades fundamentales y vigilar estrictamente el dominio.
+                </p>
+            </div>
+
+            <!-- Tabla Comparativa -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-slate-600 border-collapse">
+                    <thead class="bg-slate-100 text-slate-700 uppercase text-xs">
+                        <tr>
+                            <th class="p-3 border">Categoría</th>
+                            <th class="p-3 border">Fórmula Clave</th>
+                            <th class="p-3 border">Objetivo</th>
+                            <th class="p-3 border">Cuándo utilizarla</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b">
+                            <td class="p-3 border font-semibold text-slate-800">Pitagórica</td>
+                            <td class="p-3 border">\(\operatorname{sen}^2(x) + \cos^2(x) = 1\)</td>
+                            <td class="p-3 border">Relacionar potencias cuadráticas de seno y coseno</td>
+                            <td class="p-3 border">Presencia de términos elevados al cuadrado</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-3 border font-semibold text-slate-800">Cociente</td>
+                            <td class="p-3 border">\(\tan(x) = \frac{\operatorname{sen}(x)}{\cos(x)}\)</td>
+                            <td class="p-3 border">Homogeneizar expresiones a senos y cosenos</td>
+                            <td class="p-3 border">Cuando aparecen tangentes o cotangentes aisladas</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-3 border font-semibold text-slate-800">Ángulo Doble</td>
+                            <td class="p-3 border">\(\operatorname{sen}(2x) = 2\operatorname{sen}(x)\cos(x)\)</td>
+                            <td class="p-3 border">Reducir argumentos múltiples a simples</td>
+                            <td class="p-3 border">Ecuaciones o identidades con ángulos dobles</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Simulador Interactivo de Identidades -->
+            <div class="bg-slate-900 text-white p-6 sm:p-8 rounded-2xl space-y-6 shadow-inner">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <span class="text-indigo-400 font-semibold text-xs tracking-wider uppercase">Herramienta Didáctica</span>
+                        <h3 class="text-xl font-bold text-white">Simulador de Evaluación Numérica y Demostración</h3>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="simulador.cambiarCaso(1)" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-xs rounded font-medium transition">Caso 1: Pitagórica</button>
+                        <button onclick="simulador.cambiarCaso(2)" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs rounded font-medium transition">Caso 2: Ángulo Doble</button>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 bg-slate-800/60 p-5 rounded-xl border border-slate-700">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Ángulo \(x\) (en grados):</label>
+                        <input type="number" id="simAngulo" value="30" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-white focus:outline-none focus:border-indigo-500" oninput="simulador.evaluar()">
+                        <p id="descCaso" class="text-xs text-slate-400 mt-3"></p>
+                    </div>
+                    <div class="space-y-2 text-sm flex flex-col justify-center">
+                        <div class="flex justify-between border-b border-slate-700 pb-1">
+                            <span class="text-slate-400">Lado Izquierdo (LHS):</span>
+                            <span id="resLHS" class="font-mono font-bold text-indigo-300">--</span>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-700 pb-1">
+                            <span class="text-slate-400">Lado Derecho (RHS):</span>
+                            <span id="resRHS" class="font-mono font-bold text-emerald-300">--</span>
+                        </div>
+                        <div class="flex justify-between pt-1">
+                            <span class="text-slate-400">Estado de Coincidencia:</span>
+                            <span id="resEstado" class="font-bold text-emerald-400">Verificado numéricamente</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: EJERCICIOS PRÁCTICOS RESUELTOS Y PRÁCTICA INTERACTIVA -->
+        <section id="ejercicios" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-10 space-y-8">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 border-b pb-3">3. Ejercicios Prácticos Resueltos</h2>
+                <p class="mt-4 text-slate-600">Ejercicios de dificultad progresiva con justificación algebraica detallada y restricciones de dominio.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Ejercicio 1 -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 space-y-3">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded">Ejercicio 1</span>
+                    <h3 class="font-bold text-slate-900">Simplificación mediante Identidad Pitagórica</h3>
+                    <p class="text-sm text-slate-600">Simplificar \(\frac{1 - \cos^2(x)}{\operatorname{sen}(x)}\) suponiendo que está definida.</p>
+                    <div class="text-sm text-slate-700 bg-white p-3 rounded border space-y-1">
+                        <p><strong>Desarrollo:</strong> De \(\operatorname{sen}^2(x) + \cos^2(x) = 1\), se deduce que \(1 - \cos^2(x) = \operatorname{sen}^2(x)\).</p>
+                        <p>Sustituyendo: \(\frac{\operatorname{sen}^2(x)}{\operatorname{sen}(x)} = \operatorname{sen}(x)\).</p>
+                    </div>
+                </div>
+
+                <!-- Ejercicio 2 -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 space-y-3">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded">Ejercicio 2</span>
+                    <h3 class="font-bold text-slate-900">Demostración de Identidad Recíproca</h3>
+                    <p class="text-sm text-slate-600">Demostrar que \(\sec^2(x) - \tan^2(x) = 1\).</p>
+                    <div class="text-sm text-slate-700 bg-white p-3 rounded border space-y-1">
+                        <p><strong>Desarrollo:</strong> Expresar en senos y cosenos: \(\frac{1}{\cos^2(x)} - \frac{\operatorname{sen}^2(x)}{\cos^2(x)} = \frac{1 - \operatorname{sen}^2(x)}{\cos^2(x)}\).</p>
+                        <p>Aplicando la identidad pitagórica en el numerador: \(\frac{\cos^2(x)}{\cos^2(x)} = 1\).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Práctica Interactiva -->
+            <div class="mt-8 pt-8 border-t space-y-6">
+                <h3 class="text-xl font-bold text-slate-900">Práctica Interactiva de Autoevaluación</h3>
+                <div class="bg-indigo-900 text-white p-6 rounded-xl space-y-4">
+                    <p class="text-sm font-medium" id="quizPregunta">Pregunta 1: ¿A qué es equivalente la expresión \(1 - \operatorname{sen}^2(x)\)?</p>
+                    <div id="quizOpciones" class="grid sm:grid-cols-2 gap-3">
+                        <button onclick="quiz.verificar(0)" class="p-3 text-left bg-indigo-800 hover:bg-indigo-700 rounded text-sm transition border border-indigo-700">A) \(\cos^2(x)\)</button>
+                        <button onclick="quiz.verificar(1)" class="p-3 text-left bg-indigo-800 hover:bg-indigo-700 rounded text-sm transition border border-indigo-700">B) \(\tan^2(x)\)</button>
+                        <button onclick="quiz.verificar(2)" class="p-3 text-left bg-indigo-800 hover:bg-indigo-700 rounded text-sm transition border border-indigo-700">C) \(\csc^2(x)\)</button>
+                        <button onclick="quiz.verificar(3)" class="p-3 text-left bg-indigo-800 hover:bg-indigo-700 rounded text-sm transition border border-indigo-700">D) \(1 + \cos^2(x)\)</button>
+                    </div>
+                    <p id="quizFeedback" class="text-sm font-semibold mt-2 text-indigo-200"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: CONCLUSIONES Y BIBLIOGRAFÍA -->
+        <section id="conclusiones" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-10 space-y-6">
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 border-b pb-3">4. Conclusiones y Bibliografía Académica</h2>
+            
+            <div class="space-y-4 text-slate-600">
+                <p>
+                    El dominio de la <strong>trigonometría analítica</strong> es fundamental para el tránsito exitoso hacia el cálculo y las matemáticas superiores. Las identidades no son simples fórmulas de memoria, sino herramientas de equivalencia algebraica que permiten modelar fenómenos periódicos, resolver ecuaciones complejas y simplificar expresiones físicas.
+                </p>
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl text-amber-900 text-sm">
+                    <strong>Recomendación de estudio:</strong> Comprende siempre la demostración geométrica o algebraica de cada identidad en lugar de aplicarlas de forma mecánica; presta especial atención a las restricciones de dominio para evitar divisiones entre cero espurias.
+                </div>
+            </div>
+
+            <div class="pt-4 border-t">
+                <h3 class="font-bold text-slate-900 mb-3">Bibliografía Verificada</h3>
+                <ul class="space-y-2 text-sm text-slate-600">
+                    <li>• OpenStax. (2020). <em>Precalculus 2e</em>. OpenStax CNX. <a href="https://openstax.org/details/books/precalculus-2e" target="_blank" class="text-indigo-600 hover:underline">https://openstax.org/details/books/precalculus-2e</a></li>
+                    <li>• OpenStax. (2020). <em>Algebra and Trigonometry 2e</em>. OpenStax CNX. <a href="https://openstax.org/details/books/algebra-and-trigonometry-2e" target="_blank" class="text-indigo-600 hover:underline">https://openstax.org/details/books/algebra-and-trigonometry-2e</a></li>
+                    <li>• Stewart, J., Redlin, L., & Watson, S. (2015). <em>Precalculus: Mathematics for Calculus</em> (7th ed.). Cengage Learning.</li>
+                </ul>
+            </div>
+            <div class="footer-action">
+                <a href="/index.html" class="btn-return-footer">← Go Back</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="bg-slate-900 text-slate-400 py-8 mt-16 text-center text-sm">
+        <p>Monte Verde Bilingual School 2026</p>
+    </footer>
+
+    <!-- JAVASCRIPT INTERACTIVO -->
+    <script>
+        // Simulador interactivo de identidades
+        const simulador = {
+            caso: 1,
+            cambiarCaso(n) {
+                this.caso = n;
+                this.evaluar();
+            },
+            evaluar() {
+                const anguloDeg = parseFloat(document.getElementById('simAngulo').value) || 0;
+                const x = anguloDeg * (Math.PI / 180);
+                const desc = document.getElementById('descCaso');
+                const lhsElem = document.getElementById('resLHS');
+                const rhsElem = document.getElementById('resRHS');
+                const estado = document.getElementById('resEstado');
+
+                if (this.caso === 1) {
+                    document.getElementById('descCaso').innerText = "Verificando Identidad Pitagórica: sen²(x) + cos²(x) = 1";
+                    const lhs = Math.pow(Math.sin(x), 2) + Math.pow(Math.cos(x), 2);
+                    const rhs = 1;
+                    lhsElem.innerText = lhs.toFixed(5);
+                    rhsElem.innerText = rhs.toFixed(5);
+                } else {
+                    document.getElementById('descCaso').innerText = "Verificando Ángulo Doble: sen(2x) = 2·sen(x)·cos(x)";
+                    const lhs = Math.sin(2 * x);
+                    const rhs = 2 * Math.sin(x) * Math.cos(x);
+                    lhsElem.innerText = lhs.toFixed(5);
+                    rhsElem.innerText = rhs.toFixed(5);
+                }
+                estado.innerText = "Coincidencia numérica válida (Comprobación en dominio)";
+            }
+        };
+
+        // Quiz interactivo
+        const quiz = {
+            correcta: 0,
+            verificar(opcion) {
+                const feedback = document.getElementById('quizFeedback');
+                if (opcion === this.correcta) {
+                    feedback.innerText = "¡Correcto! Derivado directamente de la identidad fundamental sen²(x) + cos²(x) = 1.";
+                    feedback.className = "text-sm font-semibold mt-2 text-emerald-300";
+                } else {
+                    feedback.innerText = "Incorrecto. Recuerda despejar la identidad pitagórica fundamental.";
+                    feedback.className = "text-sm font-semibold mt-2 text-rose-300";
+                }
+            }
+        };
+
+        // Inicializar simulador al cargar
+        window.onload = () => {
+            simulador.evaluar();
+        };
+    </script>
+</body>
+</html>

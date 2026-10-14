@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones Matemáticas de Variable Real f(x) | Precálculo Académico</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- KaTeX para renderizado matemático profesional -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0ea5e9;
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --error: #ef4444;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 4rem;
+        }
+
+        /* Botón Volver a Main flotante */
+        .btn-main-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .btn-main {
+            background-color: var(--text-main);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow);
+            transition: background 0.2s, transform 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-main:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Header Principal */
+        header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            text-align: center;
+            padding: 5rem 1rem 3rem 1rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Navegación interna */
+        nav.internal-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+            margin-bottom: 3rem;
+        }
+
+        nav.internal-nav a {
+            background: var(--bg-card);
+            color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        nav.internal-nav a:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Contenedor Principal */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        p, li {
+            margin-bottom: 1rem;
+            color: #334155;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+        }
+
+        .math-block {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        /* Tablas */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* Simulador Interactivo */
+        .simulator-box {
+            background: #0f172a;
+            color: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            margin-top: 1.5rem;
+        }
+
+        .sim-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-group label {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .control-group select, .control-group input {
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: #1e293b;
+            color: white;
+            font-family: inherit;
+        }
+
+        canvas {
+            display: block;
+            background: #ffffff;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 100%;
+            height: 400px;
+        }
+
+        /* Pestañas del simulador */
+        .sim-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .sim-tab {
+            background: #1e293b;
+            color: #94a3b8;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .sim-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .sim-panel {
+            display: none;
+        }
+
+        .sim-panel.active {
+            display: block;
+        }
+
+        /* Ejercicios Interactivos */
+        .exercise-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .exercise-card input[type="text"] {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            width: 250px;
+            margin-right: 0.5rem;
+        }
+
+        .btn-action {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-action:hover {
+            background: var(--primary-dark);
+        }
+
+        .feedback {
+            margin-top: 0.75rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .feedback.correct { color: var(--success); }
+        .feedback.incorrect { color: var(--error); }
+
+        .explanation {
+            background: #e2e8f0;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 4rem;
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            section { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botón Volver a Main (Ruta fácilmente modificable) -->
+    <div class="btn-main-container">
+        <a href="/index.html" id="backToMainBtn" class="btn-main">
+            ← Volver a Main
+        </a>
+    </div>
+
+    <header>
+        <h1>Funciones Matemáticas de Variable Real</h1>
+        <p>Análisis riguroso, precálculo avanzado e interactividad visual en la notación \(f(x)\)</p>
+    </header>
+
+    <nav class="internal-nav">
+        <a href="#seccion1">1. Introducción y Fundamentos</a>
+        <a href="#seccion2">2. Metodología e Interactividad</a>
+        <a href="#seccion3">3. Ejercicio Práctico y Pruebas</a>
+        <a href="#seccion4">4. Conclusiones y Bibliografía</a>
+    </nav>
+
+    <main>
+        <!-- SECCIÓN 1: INTRODUCCIÓN Y FUNDAMENTOS -->
+        <section id="seccion1">
+            <h2>1. Introducción y Fundamentos</h2>
+            <p>El estudio de las funciones matemáticas de variable real constituye el pilar fundamental del precálculo y del análisis matemático. Una función establece una correspondencia unívoca entre cantidades, permitiendo modelar fenómenos de la naturaleza, la economía y la ciencia.</p>
+            
+            <h3>A. Concepto y definición de función</h3>
+            <p>Una <strong>función</strong> \(f\) es una regla de correspondencia que asigna a cada elemento \(x\) de un conjunto denominado <strong>dominio</strong> (\(D_f\)) exactamente un elemento \(y\) de un conjunto denominado <strong>codominio</strong>, denotado como \(y = f(x)\).</p>
+            <div class="math-block">
+                \[ f: A \rightarrow B \quad \text{tal que} \quad y = f(x) \]
+            </div>
+            <ul>
+                <li><strong>Variable independiente (\(x\)):</strong> Representa los valores de entrada elegidos libremente en el dominio.</li>
+                <li><strong>Variable dependiente (\(y\)):</strong> Representa el valor de salida resultante al aplicar la regla \(f\) sobre \(x\).</li>
+                <li><strong>Dominio:</strong> Conjunto de todos los valores reales para los cuales la expresión está definida.</li>
+                <li><strong>Rango o recorrido:</strong> Conjunto de todos los valores reales \(y\) que la función efectivamente toma.</li>
+            </ul>
+            <p><strong>Evaluación de funciones:</strong> Consiste en sustituir el valor de la variable independiente por un número o expresión algebraica. Por ejemplo, dada la función lineal:</p>
+            <div class="math-block">
+                \[ f(x) = 2x + 3 \]
+            </div>
+            <p>Para evaluar en \(x = 2\), sustituimos \(2\) en cada ocurrencia de \(x\):</p>
+            <div class="math-block">
+                \[ f(2) = 2(2) + 3 = 4 + 3 = 7 \]
+            </div>
+
+            <h3>B. Clasificación de las funciones matemáticas</h3>
+            <ol>
+                <li><strong>Función Constante:</strong> \(f(x) = c\) (ej. \(f(x) = 4\)). Su gráfica es una recta horizontal puesto que para cualquier valor de \(x\), la ordenada \(y\) permanece invariable.</li>
+                <li><strong>Función Lineal y Afín:</strong> \(f(x) = mx + b\) (ej. \(f(x) = 2x + 1\)). La pendiente \(m\) determina la inclinación y el comportamiento (creciente si \(m > 0\), decreciente si \(m < 0\)). Si \(b = 0\), se denomina lineal en sentido estricto; si \(b \neq 0\), es afín.</li>
+                <li><strong>Función Cuadrática:</strong> \(f(x) = ax^2 + bx + c\) (\(a \neq 0\), ej. \(f(x) = x^2 - 4\)). Su gráfica es una parábola; el signo de \(a\) determina su concavidad, y cuenta con un vértice, eje de simetría y raíces reales.</li>
+                <li><strong>Función Polinómica:</strong> \(f(x) = a_n x^n + \cdots + a_1 x + a_0\) (ej. \(f(x) = x^3 - 2x\)). Su comportamiento global está determinado por su grado \(n\) y su coeficiente principal.</li>
+                <li><strong>Función Racional:</strong> \(f(x) = \frac{P(x)}{Q(x)}\) con \(Q(x) \neq 0\) (ej. \(f(x) = \frac{1}{x}\)). Presenta restricciones en el dominio donde el denominador se anula, generando asíntotas verticales.</li>
+                <li><strong>Función Radical:</strong> \(f(x) = \sqrt{x}\) (ej. \(f(x) = \sqrt{x-1}\)). Sus restricciones de dominio dependen de la paridad del índice de la raíz (para índices pares, el subradical debe ser mayor o igual a cero).</li>
+                <li><strong>Función de Valor Absoluto:</strong> \(f(x) = |x|\) (ej. \(f(x) = |x-2|\)). Su gráfica tiene forma de "V" y puede reescribirse como una función definida por partes.</li>
+                <li><strong>Función Exponencial:</strong> \(f(x) = a^x\) (\(a > 0, a \neq 1\), ej. \(f(x) = 2^x\)). Modela crecimiento rápido o decaimiento, con una asíntota horizontal en \(y = 0\).</li>
+                <li><strong>Función Logarítmica:</strong> \(f(x) = \log_a(x)\) (\(a > 0, a \neq 1\), ej. \(f(x) = \log_2(x)\)). Es la inversa de la función exponencial; su dominio se restringe estrictamente a reales positivos (\(x > 0\)).</li>
+                <li><strong>Funciones Trigonométricas:</strong> \(f(x) = \sin x\), \(f(x) = \cos x\), \(f(x) = \tan x\). Son funciones periódicas. En las representaciones gráficas interactivas, los ángulos se miden rigurosamente en radianes.</li>
+            </ol>
+
+            <h3>C. Dominio, rango y propiedades fundamentales</h3>
+            <p>El análisis de una función comprende determinar su dominio algebraico, hallar las intersecciones con los ejes coordenados igualando a cero (\(x\)-interceptos) o evaluando en \(0\) (\(y\)-intercepto), estudiar sus intervalos de monotonía (crecimiento y decrecimiento), identificar simetrías (funciones pares si \(f(-x) = f(x)\) e impares si \(f(-x) = -f(x)\)), y establecer asíntotas. La <em>prueba de la recta vertical</em> garantiza que cualquier recta vertical interseca la gráfica a lo sumo en un punto para que represente una función.</p>
+
+            <h3>D. Operaciones, composición y función inversa</h3>
+            <p>Dichas funciones pueden combinarse algebraicamente mediante suma, resta, multiplicación y división de expresiones. La <strong>composición de funciones</strong> se define como:</p>
+            <div class="math-block">
+                \[ (f \circ g)(x) = f(g(x)) \]
+            </div>
+            <p>Por ejemplo, si \(f(x) = 2x + 1\) y \(g(x) = x^2\), entonces \((f \circ g)(x) = 2(x^2) + 1 = 2x^2 + 1\), mientras que \((g \circ f)(x) = (2x + 1)^2\), demostrando que la composición no es conmutativa.</p>
+            <p>Para hallar la <strong>función inversa</strong> \(f^{-1}(x)\): 1) Se escribe \(y = f(x)\), 2) Se intercambian \(x\) e \(y\), 3) Se despeja \(y\) algebraicamente, y 4) Se verifica mediante la propiedad de composición \(f(f^{-1}(x)) = x\).</p>
+
+            <h3>E. Funciones definidas por partes</h3>
+            <p>Son aquellas cuya regla de correspondencia cambia según el intervalo del dominio. Ejemplo clásico:</p>
+            <div class="math-block">
+                \[ f(x) = \begin{cases} x + 2, & x < 0 \\ x^2, & x \ge 0 \end{cases} \]
+            </div>
+            <p>Para calcular una imagen, se evalúa primero a qué condición pertenece el valor de \(x\).</p>
+        </section>
+
+        <!-- SECCIÓN 2: METODOLOGÍA COMPARADA E INTERACTIVIDAD -->
+        <section id="seccion2">
+            <h2>2. Metodología Comparada e Interactividad</h2>
+            
+            <h3>A. Cuadro comparativo de las familias de funciones</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo de Función</th>
+                            <th>Forma General</th>
+                            <th>Ejemplo Típico</th>
+                            <th>Característica Principal / Gráfica</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Constante</strong></td>
+                            <td>\(f(x) = c\)</td>
+                            <td>\(f(x) = 4\)</td>
+                            <td>Recta horizontal paralela al eje \(x\).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lineal / Afín</strong></td>
+                            <td>\(f(x) = mx + b\)</td>
+                            <td>\(f(x) = 2x + 1\)</td>
+                            <td>Línea recta con pendiente \(m\) e intercepto \(b\).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cuadrática</strong></td>
+                            <td>\(f(x) = ax^2 + bx + c\)</td>
+                            <td>\(f(x) = x^2 - 4\)</td>
+                            <td>Parábola simétrica con vértice y concavidad definida.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Polinómica</strong></td>
+                            <td>\(f(x) = \sum a_k x^k\)</td>
+                            <td>\(f(x) = x^3 - 2x\)</td>
+                            <td>Curva suave continua sin saltos ni asíntotas.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Racional</strong></td>
+                            <td>\(f(x) = \frac{P(x)}{Q(x)}\)</td>
+                            <td>\(f(x) = \frac{1}{x}\)</td>
+                            <td>Cociente polinómico con asíntotas y discontinuidades.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Radical</strong></td>
+                            <td>\(f(x) = \sqrt{x}\)</td>
+                            <td>\(f(x) = \sqrt{x-1}\)</td>
+                            <td>Curva con dominio acotado por restricciones de índice.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Valor Absoluto</strong></td>
+                            <td>\(f(x) = |x|\)</td>
+                            <td>\(f(x) = |x-2|\)</td>
+                            <td>Gráfica en forma de "V" con punto anguloso en el vértice.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exponencial</strong></td>
+                            <td>\(f(x) = a^x\)</td>
+                            <td>\(f(x) = 2^x\)</td>
+                            <td>Crecimiento o decaimiento acelerado; asíntota horizontal.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Logarítmica</strong></td>
+                            <td>\(f(x) = \log_a(x)\)</td>
+                            <td>\(f(x) = \log_2(x)\)</td>
+                            <td>Inversa exponencial; asíntota vertical en \(x = 0\).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trigonométrica</strong></td>
+                            <td>\(f(x) = \sin x\)</td>
+                            <td>\(f(x) = \sin x\)</td>
+                            <td>Comportamiento ondulatorio y periódico en radianes.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><em>Nota metodológica:</em> Mientras que las funciones polinómicas y constantes exhiben dominios reales irrestrictos y continuidad total, las racionales, radicales y logarítmicas imponen fronteras estrictas derivadas de operaciones algebraicas no permitidas en los números reales.</p>
+
+            <h3>B. Simulador Interactivo de Funciones (HTML5 Canvas & JS)</h3>
+            <div class="simulator-box">
+                <div class="sim-tabs">
+                    <button class="sim-tab active" onclick="switchTab(1)">1. Graficador</button>
+                    <button class="sim-tab card-tab" onclick="switchTab(2)">2. Dominio y Rango</button>
+                    <button class="sim-tab" onclick="switchTab(3)">3. Transformaciones</button>
+                    <button class="sim-tab" onclick="switchTab(4)">4. Inversa / Compuesta</button>
+                </div>
+
+                <!-- Modo 1: Graficador -->
+                <div id="panel-1" class="sim-panel active">
+                    <div class="sim-controls">
+                        <div class="control-group">
+                            <label for="funcSelect">Seleccionar Modelo:</label>
+                            <select id="funcSelect" onchange="updateSimulator()">
+                                <option value="linear">Lineal: f(x) = 2x + 1</option>
+                                <option value="quadratic" selected>Cuadrática: f(x) = x² - 4</option>
+                                <option value="cubic">Cúbica: f(x) = x³ - 3x</option>
+                                <option value="rational">Racional: f(x) = 1 / x</option>
+                                <option value="radical">Radical: f(x) = √(x)</option>
+                                <option value="absolute">Valor Absoluto: f(x) = |x - 2|</option>
+                                <option value="exponential">Exponencial: f(x) = 2ˣ</option>
+                                <option value="sine">Trigonométrica: f(x) = sin(x)</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="customInput">Expresión personalizada (Ej: x*x - 2):</label>
+                            <input type="text" id="customInput" placeholder="Ej: x*x - 4" oninput="handleCustomFunction()">
+                        </div>
+                    </div>
+                    <canvas id="mathCanvas" width="800" height="400"></canvas>
+                    <p id="sim-status" style="margin-top: 10px; font-size: 0.9rem; color: #94a3b8;"></p>
+                </div>
+
+                <!-- Modo 2: Explorador de Dominio y Rango -->
+                <div id="panel-2" class="sim-panel">
+                    <p><strong>Exploración de Restricciones del Dominio:</strong></p>
+                    <div class="sim-controls">
+                        <div class="control-group">
+                            <label>Selecciona función analítica:</label>
+                            <select id="domainFunc" onchange="updateDomainExplorer()">
+                                <option value="poly">Polinómica: f(x) = x² - 5x + 6</option>
+                                <option value="rat">Racional: f(x) = 1 / (x - 2)</option>
+                                <option value="rad">Radical: f(x) = √(x - 3)</option>
+                                <option value="log">Logarítmica: f(x) = ln(x - 1)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="domain-explanation" style="background: #1e293b; padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.95rem;"></div>
+                </div>
+
+                <!-- Modo 3: Transformaciones -->
+                <div id="panel-3" class="sim-panel">
+                    <p>Explora la transformación geométrica general: <strong>\(g(x) = a \cdot f(x - h) + k\)</strong> usando una parábola base \(f(x) = x^2\).</p>
+                    <div class="sim-controls">
+                        <div class="control-group">
+                            <label>Parámetro vertical 'a' (<span id="val-a">1</span>):</label>
+                            <input type="range" id="paramA" min="-3" max="3" step="0.5" value="1" oninput="updateTransform()">
+                        </div>
+                        <div class="control-group">
+                            <label>Desplazamiento horizontal 'h' (<span id="val-h">0</span>):</label>
+                            <input type="range" id="paramH" min="-5" max="5" step="1" value="0" oninput="updateTransform()">
+                        </div>
+                        <div class="control-group">
+                            <label>Desplazamiento vertical 'k' (<span id="val-k">0</span>):</label>
+                            <input type="range" id="paramK" min="-5" max="5" step="1" value="0" oninput="updateTransform()">
+                        </div>
+                    </div>
+                    <canvas id="transformCanvas" width="800" height="350"></canvas>
+                </div>
+
+                <!-- Modo 4: Composición e Inversa -->
+                <div id="panel-4" class="sim-panel">
+                    <p>Visualización de función invertible y su simetría respecto a la recta identidad \(y = x\).</p>
+                    <div class="sim-controls">
+                        <div class="control-group">
+                            <label>Función lineal biyectiva:</label>
+                            <select id="invFunc" onchange="drawInverseSim()">
+                                <option value="f1">f(x) = 2x - 1  |  f⁻¹(x) = (x + 1) / 2</option>
+                                <option value="f2">f(x) = 3x + 2  |  f⁻¹(x) = (x - 2) / 3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <canvas id="inverseCanvas" width="800" height="350"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: EJERCICIO PRÁCTICO RESUELTO Y PRUEBAS -->
+        <section id="seccion3">
+            <h2>3. Ejercicio Práctico Resuelto y Pruebas</h2>
+            
+            <h3>Problema Modelo: Análisis Completo de una Función Cuadrática</h3>
+            <p>Dada la función cuadrática \(f(x) = x^2 - 4x + 3\), determina paso a paso sus propiedades clave:</p>
+            <ul>
+                <li><strong>Paso 1 (Dominio):</strong> Al ser una función polinómica, no presenta denominadores nulos ni radicales de índice par. Por lo tanto, \(D_f = \mathbb{R}\).</li>
+                <li><strong>Paso 2 (Raíces / Ceros):</strong> Igualamos \(f(x) = 0\): \(x^2 - 4x + 3 = 0\). Factorizando obtenemos \((x - 1)(x - 3) = 0\), lo cual arroja las raíces \(x = 1\) y \(x = 3\) (puntos \((1,0)\) y \((3,0)\)).</li>
+                <li><strong>Paso 3 (Intersección eje \(y\)):</strong> Evaluamos en \(x = 0\): \(f(0) = 0^2 - 4(0) + 3 = 3\), obteniendo el punto \((0,3)\).</li>
+                <li><strong>Paso 4 (Vértice):</strong> Aplicamos la fórmula \(x_v = -\frac{b}{2a} = -\frac{-4}{2(1)} = 2\). Evaluando \(f(2) = 2^2 - 4(2) + 3 = -1\). El vértice es \(V(2, -1)\).</li>
+                <li><strong>Paso 5 (Rango):</strong> Como \(a = 1 > 0\), la parábola abre hacia arriba, alcanzando un valor mínimo absoluto en \(y = -1\). El rango es \(R_f = [-1, \infty)\).</li>
+                <li><strong>Paso 6 (Monotonía y Simetría):</strong> Decreciente en \((-\infty, 2]\), creciente en \([2, \infty)\). Eje de simetría: \(x = 2\).</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">Ejercicios Adicionales Interactivos</h3>
+            <p>Pon a prueba tus conocimientos resolviendo los siguientes reactivos evaluados en tiempo real por el sistema:</p>
+
+            <!-- Ejercicio 1 -->
+            <div class="exercise-card">
+                <p><strong>Nivel Básico (1):</strong> Dada la función lineal \(f(x) = 3x - 5\), evalúa y calcula el valor numérico exacto de \(f(4)\).</p>
+                <input type="text" id="ans1" placeholder="Tu respuesta numérica">
+                <button class="btn-action" onclick="checkExercise(1, '7')">Comprobar</button>
+                <div id="feedback1" class="feedback"></div>
+                <div id="exp1" class="explanation"><strong>Explicación:</strong> Sustituimos \(x = 4\) en la expresión: \(f(4) = 3(4) - 5 = 12 - 5 = 7\).</div>
+            </div>
+
+            <!-- Ejercicio 2 -->
+            <div class="exercise-card">
+                <p><strong>Nivel Intermedio (2):</strong> Determina el extremo inferior del dominio para la función radical \(f(x) = \sqrt{x - 5}\). Ingresa el número entero correspondiente al menor valor de \(x\) permitido.</p>
+                <input type="text" id="ans2" placeholder="Ej: 5">
+                <button class="btn-action" onclick="checkExercise(2, '5')">Comprobar</button>
+                <div id="feedback2" class="feedback"></div>
+                <div id="exp2" class="explanation"><strong>Explicación:</strong> Para que la raíz cuadrada arroje un número real, el radicando debe ser mayor o igual a cero: \(x - 5 \ge 0 \implies x \ge 5\). Por tanto, el dominio comienza en 5.</div>
+            </div>
+
+            <!-- Ejercicio 3 -->
+            <div class="exercise-card">
+                <p><strong>Nivel Intermedio-Avanzado (3):</strong> Si \(f(x) = x + 2\) y \(g(x) = x^2\), calcula la expresión evaluada para \((f \circ g)(3)\).</p>
+                <input type="text" id="ans3" placeholder="Tu respuesta numérica">
+                <button class="btn-action" onclick="checkExercise(3, '11')">Comprobar</button>
+                <div id="feedback3" class="feedback"></div>
+                <div id="exp3" class="explanation"><strong>Explicación:</strong> Primero evaluamos \(g(3) = 3^2 = 9\). Luego, aplicamos \(f\) sobre ese resultado: \(f(9) = 9 + 2 = 11\).</div>
+            </div>
+
+            <!-- Ejercicio 4 -->
+            <div class="exercise-card">
+                <p><strong>Nivel Avanzado (4):</strong> Dada la función invertible \(f(x) = 2x + 6\), encuentra el valor de su función inversa evaluada en 10, es decir, \(f^{-1}(10)\).</p>
+                <input type="text" id="ans4" placeholder="Tu respuesta numérica">
+                <button class="btn-action" onclick="checkExercise(4, '2')">Comprobar</button>
+                <div id="feedback4" class="feedback"></div>
+                <div id="exp4" class="explanation"><strong>Explicación:</strong> Despejamos la inversa: \(y = 2x + 6 \implies x = 2y + 6 \implies 2y = x - 6 \implies f^{-1}(x) = \frac{x - 6}{2}\). Evaluando en \(10\): \(f^{-1}(10) = \frac{10 - 6}{2} = \frac{4}{2} = 2\).</div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: CONCLUSIONES Y BIBLIOGRAFÍA -->
+        <section id="seccion4">
+            <h2>4. Conclusiones y Bibliografía Académica</h2>
+            
+            <h3>A. Conclusiones</h3>
+            <ol>
+                <li><strong>Modelación de Fenómenos:</strong> Las funciones matemáticas constituyen herramientas indispensables para representar relaciones cuantitativas y modelar de forma precisa fenómenos físicos, económicos y sociales del entorno real.</li>
+                <li><strong>Taxonomía y Propiedades:</strong> El conocimiento profundo de las diferentes familias de funciones y sus restricciones algebraicas capacita al estudiante para anticipar comportamientos gráficos y analíticos sin necesidad de realizar tabulaciones exhaustivas.</li>
+                <li><strong>Operatividad Estructural:</strong> El dominio de conceptos como composición, operaciones algebraicas y funciones inversas otorga la flexibilidad analítica necesaria para resolver ecuaciones complejas y problemas de optimización en precálculo.</li>
+                <li><strong>Sinergia Tecnológica:</strong> La integración armónica de métodos algebraicos formales, tablas comparativas y simuladores gráficos interactivos consolida una comprensión geométrica y conceptual sólida en los educandos.</li>
+            </ol>
+
+            <h3>B. Bibliografía Académica</h3>
+            <ul style="list-style-type: none; padding-left: 0;">
+                <li style="margin-bottom: 1rem;">Stewart, J., Redlin, L., & Watson, S. (2015). <em>Precalculus: Mathematics for Calculus</em> (7.ª ed.). Cengage Learning.</li>
+                <li style="margin-bottom: 1rem;">OpenStax. (2021). <em>Precalculus 2e</em>. Rice University. Disponible en: <a href="https://openstax.org/details/books/precalculus-2e" target="_blank" style="color: var(--primary);">https://openstax.org/details/books/precalculus-2e</a></li>
+                <li style="margin-bottom: 1rem;">OpenStax. (2020). <em>Algebra and Trigonometry 2e</em>. Rice University. Disponible en: <a href="https://openstax.org/details/books/algebra-and-trigonometry-2e" target="_blank" style="color: var(--primary);">https://openstax.org/details/books/algebra-and-trigonometry-2e</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Monte Verde Bilingual School. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Script de Interactividad y Simulador Matemático -->
+    <script>
+        // Pestañas del Simulador
+        function switchTab(tabIndex) {
+            document.querySelectorAll('.sim-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.sim-panel').forEach(p => p.classList.remove('active'));
+            
+            document.querySelectorAll('.sim-tab')[tabIndex - 1].classList.add('active');
+            document.getElementById(`panel-${tabIndex}`).classList.add('active');
+
+            if (tabIndex === 1) drawMainGraph();
+            if (tabIndex === 2) updateDomainExplorer();
+            if (tabIndex === 3) updateTransform();
+            if (tabIndex === 4) drawInverseSim();
+        }
+
+        // Lógica de Gráficas en Canvas (Modo 1)
+        function drawMainGraph() {
+            const canvas = document.getElementById('mathCanvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            ctx.clearRect(0, 0, width, height);
+
+            // Sistema de coordenadas
+            const originX = width / 2;
+            const originY = height / 2;
+            const scale = 40;
+
+            // Cuadrícula y Ejes
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (let x = originX % scale; x < width; x += scale) {
+                ctx.moveTo(x, 0); ctx.lineTo(x, height);
+            }
+            for (let y = originY % scale; y < height; y += scale) {
+                ctx.moveTo(0, y); ctx.lineTo(width, y);
+            }
+            ctx.stroke();
+
+            // Ejes X e Y principales
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, originY); ctx.lineTo(width, originY);
+            ctx.moveTo(originX, 0); ctx.lineTo(originX, height);
+            ctx.stroke();
+
+            const selected = document.getElementById('funcSelect').value;
+            const customVal = document.getElementById('customInput').value.trim();
+            const statusEl = document.getElementById('sim-status');
+
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+
+            let drawing = false;
+            let evaluatedFunc = null;
+
+            if (customVal !== "") {
+                try {
+                    // Sanitización segura y evaluación controlada mediante Function (restringida a math simple)
+                    evaluatedFunc = (x) => {
+                        let sanitized = customVal.replace(/[^0-9x\+\-\*\/\.\(\)\s^]/gi, '').replace(/\^/g, '**');
+                        let fn = new Function('x', 'return ' + sanitized);
+                        return fn(x);
+                    };
+                    statusEl.textContent = "Mostrando expresión personalizada válida.";
+                } catch (e) {
+                    statusEl.textContent = "Expresión personalizada no válida. Verifique la sintaxis.";
+                    return;
+                }
+            } else {
+                statusEl.textContent = "Mostrando modelo predeterminado seleccionado.";
+            }
+
+            for (let px = 0; px <= width; px += 2) {
+                let x = (px - originX) / scale;
+                let y = 0;
+
+                try {
+                    if (customVal !== "") {
+                        y = evaluatedFunc(x);
+                    } else {
+                        switch (selected) {
+                            case 'linear': y = 2 * x + 1; break;
+                            case 'quadratic': y = x * x - 4; break;
+                            case 'cubic': y = Math.pow(x, 3) - 3 * x; break;
+                            case 'rational': 
+                                if (Math.abs(x) < 0.05) { drawing = false; continue; }
+                                y = 1 / x; 
+                                break;
+                            case 'radical':
+                                if (x < 0) { drawing = false; continue; }
+                                y = Math.sqrt(x);
+                                break;
+                            case 'absolute': y = Math.abs(x - 2); break;
+                            case 'exponential': y = Math.pow(2, x); break;
+                            case 'sine': y = Math.sin(x); break;
+                        }
+                    }
+
+                    let py = originY - (y * scale);
+                    if (py < -100 || py > height + 100) { drawing = false; continue; }
+
+                    if (!drawing) {
+                        ctx.moveTo(px, py);
+                        drawing = true;
+                    } else {
+                        ctx.lineTo(px, py);
+                    }
+                } catch (err) {
+                    drawing = false;
+                }
+            }
+            ctx.stroke();
+        }
+
+        function handleCustomFunction() {
+            drawMainGraph();
+        }
+
+        document.getElementById('funcSelect').addEventListener('change', drawMainGraph);
+
+        // Modo 2: Explorador de Dominio
+        function updateDomainExplorer() {
+            const val = document.getElementById('domainFunc').value;
+            const box = document.getElementById('domain-explanation');
+            if (val === 'poly') {
+                box.innerHTML = "<strong>Función: f(x) = x² - 5x + 6</strong><br>• Dominio: Todos los reales (-∞, +∞)<br>• Rango: [-0.25, +∞)<br>• Causa: Al ser polinómica entera, no existen restricciones de división por cero ni radicales pares.";
+            } else if (val === 'rat') {
+                box.innerHTML = "<strong>Función: f(x) = 1 / (x - 2)</strong><br>• Dominio: x ∈ ℝ tal que x ≠ 2 (-∞, 2) ∪ (2, +∞)<br>• Rango: y ∈ ℝ tal que y ≠ 0<br>• Causa: El denominador se anula si x = 2, provocando una asíntota vertical.";
+            } else if (val === 'rad') {
+                box.innerHTML = "<strong>Función: f(x) = √(x - 3)</strong><br>• Dominio: [3, +∞)<br>• Rango: [0, +∞)<br>• Causa: El subradical debe cumplir estrictamente x - 3 ≥ 0 para evitar números complejos.";
+            } else if (val === 'log') {
+                box.innerHTML = "<strong>Función: f(x) = ln(x - 1)</strong><br>• Dominio: (1, +∞)<br>• Rango: (-∞, +∞)<br>• Causa: El argumento del logaritmo natural debe ser estrictamente positivo (x - 1 > 0).";
+            }
+        }
+
+        // Modo 3: Transformaciones
+        function updateTransform() {
+            const a = parseFloat(document.getElementById('paramA').value);
+            const h = parseFloat(document.getElementById('paramH').value);
+            const k = parseFloat(document.getElementById('paramK').value);
+
+            document.getElementById('val-a').textContent = a;
+            document.getElementById('val-h').textContent = h;
+            document.getElementById('val-k').textContent = k;
+
+            const canvas = document.getElementById('transformCanvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const hCanvas = canvas.height;
+            const originX = w / 2;
+            const originY = hCanvas / 2 + 50;
+            const scale = 30;
+
+            ctx.clearRect(0, 0, w, hCanvas);
+
+            // Ejes
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, originY); ctx.lineTo(w, originY);
+            ctx.moveTo(originX, 0); ctx.lineTo(originX, hCanvas);
+            ctx.stroke();
+
+            // Parábola Base f(x) = x^2
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            for (let px = 0; px <= w; px++) {
+                let x = (px - originX) / scale;
+                let y = x * x;
+                let py = originY - (y * scale);
+                if (px === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+
+            // Parábola Transformada g(x) = a * (x - h)^2 + k
+            ctx.strokeStyle = '#2563eb';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            for (let px = 0; px <= w; px++) {
+                let x = (px - originX) / scale;
+                let y = a * Math.pow((x - h), 2) + k;
+                let py = originY - (y * scale);
+                let pxx = originX + (x * scale);
+                if (px === 0) ctx.moveTo(pxxx, py); else ctx.lineTo(pxxx, py);
+            }
+            ctx.stroke();
+        }
+
+        // Modo 4: Inversa
+        function drawInverseSim() {
+            const canvas = document.getElementById('inverseCanvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const hCanvas = canvas.height;
+            const originX = w / 2;
+            const originY = hCanvas / 2;
+            const scale = 40;
+
+            ctx.clearRect(0, 0, w, hCanvas);
+
+            // Ejes y Recta Identidad y = x
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(0, originY); ctx.lineTo(w, originY);
+            ctx.moveTo(originX, 0); ctx.lineTo(originX, hCanvas);
+            ctx.stroke();
+
+            // Recta identidad y = x (discontinua)
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(0, originY + originY); ctx.lineTo(w, originY - originY);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            const type = document.getElementById('invFunc').value;
+
+            // f(x)
+            ctx.strokeStyle = '#2563eb';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            for (let px = 0; px <= w; px++) {
+                let x = (px - originX) / scale;
+                let y = (type === 'f1') ? (2 * x - 1) : (3 * x + 2);
+                let py = originY - (y * scale);
+                if (px === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+
+            // f^-1(x)
+            ctx.strokeStyle = '#10b981';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            for (let px = 0; px <= w; px++) {
+                let x = (px - originX) / scale;
+                let y = (type === 'f1') ? ((x + 1) / 2) : ((x - 2) / 3);
+                let py = originY - (y * scale);
+                if (px === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+        }
+
+        // Lógica de Validación de Ejercicios Interactivos
+        function checkExercise(id, correctVal) {
+            const userAns = document.getElementById(`ans${id}`).value.trim();
+            const feedback = document.getElementById(`feedback${id}`);
+            const explanation = document.getElementById(`exp${id}`);
+
+            if (userAns === correctVal) {
+                feedback.textContent = "¡Respuesta Correcta! Excelente dominio del concepto.";
+                feedback.className = "feedback correct";
+                explanation.style.display = "block";
+            } else {
+                feedback.textContent = "Respuesta incorrecta. Inténtalo nuevamente o revisa la explicación.";
+                feedback.className = "feedback incorrect";
+                explanation.style.display = "block";
+            }
+        }
+
+        // Inicialización al cargar la ventana
+        window.onload = function() {
+            drawMainGraph();
+            updateDomainExplorer();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordenadas Polares, Ecuaciones Paramétricas y Vectores | Portal Académico</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #f59e0b;
+            --bg-light: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --error: #ef4444;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--secondary) 0%, #1e293b 100%);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+            padding: 0.5rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--text-heading);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .formula-box {
+            background: #f1f5f9;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            overflow-x: auto;
+        }
+
+        /* Comparative Table */
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        th, td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: var(--secondary);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* Interactive Simulators */
+        .simulator-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .sim-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .controls-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .control-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .control-item label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-heading);
+        }
+
+        .control-item input[type="range"], .control-item select, .control-item input[type="number"] {
+            padding: 0.5rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        button.secondary {
+            background-color: #64748b;
+        }
+
+        button.secondary:hover {
+            background-color: #475569;
+        }
+
+        canvas {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 500px;
+            height: 350px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .sim-output {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Exercises & Practice */
+        .exercise-box {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        .solution-toggle {
+            margin-top: 1rem;
+        }
+
+        .solution-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border);
+            background: #fdfbf7;
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .quiz-container {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 1.5rem 0;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .quiz-option {
+            padding: 0.75rem 1rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            background: #eff6ff;
+        }
+
+        .feedback {
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            background: var(--secondary);
+            color: #94a3b8;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Coordenadas Polares, Ecuaciones Paramétricas y Vectores</h1>
+        <p>Portal Académico Interactivo de Precálculo y Modelado Matemático</p>
+    </header>
+
+    <nav>
+        <a href="#fundamentos">1. Introducción y Fundamentos</a>
+        <a href="#metodologia">2. Metodología e Interactividad</a>
+        <a href="#ejercicios">3. Ejercicios Prácticos</a>
+        <a href="#conclusiones">4. Conclusiones y Bibliografía</a>
+    </nav>
+
+    <main>
+        <!-- SECCIÓN 1 -->
+        <section id="fundamentos">
+            <h2>1. Introducción y Fundamentos Teóricos</h2>
+            <p>El estudio del precálculo y la geometría analítica se enriquece notablemente al trascender el plano cartesiano tradicional. Las <strong>coordenadas polares</strong>, las <strong>ecuaciones paramétricas</strong> y los <strong>vectores</strong> proporcionan herramientas conceptuales y analíticas indispensables en matemáticas puras, física, ingeniería y computación gráfica para describir posiciones, trayectorias y magnitudes direccionales.</p>
+
+            <h3 id="polares">A. Coordenadas Polares</h3>
+            <p>El sistema de coordenadas polares es un sistema bidimensional en el cual cada punto del plano se determina mediante una distancia y un ángulo con respecto a un punto fijo y una línea de referencia.</p>
+            <ul>
+                <li><strong>Polo u origen polar (\(O\)):</strong> Punto fijo equivalente al origen \((0,0)\) cartesiano.</li>
+                <li><strong>Eje polar:</strong> Semirrecta dirigida que parte del polo, equivalente al semieje positivo de las \(x\).</li>
+                <li><strong>Radio vector (\(r\)):</strong> Distancia dirigida desde el polo hasta el punto.</li>
+                <li><strong>Ángulo polar (\(\theta\)):</strong> Ángulo formado entre el eje polar y el radio vector, medido en sentido antihorario (positivo) u horario (negativo).</li>
+            </ul>
+            <p>Un punto se representa mediante un par ordenado \((r, \theta)\). A diferencia del sistema cartesiano, en coordenadas polares un punto admite <em>infinitas representaciones equivalentes</em> debido a la periodicidad del ángulo (\(\theta + 2n\pi\)) y a la posibilidad de admitir radios negativos \((-r, \theta + \pi)\).</p>
+
+            <div class="formula-box">
+                <p><strong>Fórmulas de conversión entre sistemas:</strong></p>
+                <p>De polar a cartesiano:</p>
+                <p>$$x = r \cos(\theta), \qquad y = r \sen(\theta)$$</p>
+                <p>De cartesiano a polar:</p>
+                <p>$$r = \sqrt{x^2 + y^2}, \qquad \tan(\theta) = \frac{y}{x}$$</p>
+                <p><em>Nota sobre el cuadrante:</em> El cálculo del ángulo requiere analizar el cuadrante en el que se ubica el punto \((x,y)\), ya que la función tangente tiene periodo \(\pi\) y por sí sola no distingue entre cuadrantes opuestos.</p>
+            </div>
+
+            <p><strong>Curvas polares notables:</strong></p>
+            <ul>
+                <li><strong>Circunferencias:</strong> \(r = a\) o \(r = 2a \cos(\theta)\).</li>
+                <li><strong>Rectas:</strong> \(\theta = \theta_0\).</li>
+                <li><strong>Cardioides:</strong> \(r = a(1 \pm \cos(\theta))\) o \(r = a(1 \pm \sen(\theta))\).</li>
+                <li><strong>Rosas polares:</strong> \(r = a \cos(n\theta)\) o \(r = a \sen(n\theta)\) (con \(n\) pétalos si \(n\) es impar, o \(2n\) si es par).</li>
+                <li><strong>Espirales (como la de Arquímedes):</strong> \(r = a\theta\).</li>
+            </ul>
+
+            <h3 id="parametricas">B. Ecuaciones Paramétricas</h3>
+            <p>Una curva en el plano se describe mediante ecuaciones paramétricas cuando las coordenadas \((x, y)\) de sus puntos se expresan en función de una variable auxiliar independiente llamada <strong>parámetro</strong> (\(t\)):</p>
+            <div class="formula-box">
+                $$x = f(t), \qquad y = g(t)$$
+            </div>
+            <p>El parámetro \(t\) suele representar el tiempo, un ángulo o una proporción geométrica. Al variar \(t\) en un intervalo \([a, b]\), el punto trazado genera una trayectoria con un <em>sentido de recorrido</em> específico. Dos parametrizaciones distintas pueden representar exactamente la misma curva geométrica pero recorrerla a velocidades o en direcciones diferentes.</p>
+            <p><strong>Ejemplos clásicos:</strong></p>
+            <ol>
+                <li>Recta: \(x = t, \ y = 2t + 1 \implies y = 2x + 1\).</li>
+                <li>Circunferencia: \(x = 2\cos(t), \ y = 2\sen(t)\) con \(t \in [0, 2\pi]\).</li>
+                <li>Parábola: \(x = t, \ y = t^2 \implies y = x^2\).</li>
+            </ol>
+
+            <h3 id="vectores">C. Vectores</h3>
+            <p>Un vector es una entidad matemática que posee <strong>magnitud (módulo), dirección y sentido</strong>. Se distinguen de los escalares, que solo poseen valor numérico.</p>
+            <div class="formula-box">
+                <p>Para un vector en dos dimensiones \(\vec{v} = \langle a, b \rangle\):</p>
+                <p>Magnitud: $$|\vec{v}| = \sqrt{a^2 + b^2}$$</p>
+                <p>Vector entre dos puntos \(A(x_1, y_1)\) y \(B(x_2, y_2)\): $$\overrightarrow{AB} = \langle x_2 - x_1, y_2 - y_1 \rangle$$</p>
+                <p>Vector unitario (\(\vec{v} \neq \vec{0}\)): $$\hat{v} = \frac{\vec{v}}{|\vec{v}|}$$</p>
+            </div>
+
+            <p><strong>Operaciones vectoriales fundamentales:</strong></p>
+            <ul>
+                <li>Suma: \(\vec{u} + \vec{v} = \langle u_1 + v_1, u_2 + v_2 \rangle\)</li>
+                <li>Resta: \(\vec{u} - \vec{v} = \langle u_1 - v_1, u_2 - v_2 \rangle\)</li>
+                <li>Multiplicación por escalar: \(k\vec{v} = \langle kv_1, kv_2 \rangle\)</li>
+                <li>Producto escalar (punto): \(\vec{u} \cdot \vec{v} = u_1 v_1 + u_2 v_2\)</li>
+                <li>Ángulo entre vectores: \(\cos(\theta) = \frac{\vec{u} \cdot \vec{v}}{|\vec{u}| |\vec{v}|}\)</li>
+            </ul>
+            <p>Si el producto punto de dos vectores no nulos es cero (\(\vec{u} \cdot \vec{v} = 0\)), los vectores son ortogonales (perpendiculares).</p>
+        </section>
+
+        <!-- SECCIÓN 2 -->
+        <section id="metodologia">
+            <h2>2. Metodología Comparada e Interactividad</h2>
+            <p>La siguiente tabla sintetiza y contrasta los enfoques teóricos estudiados:</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tema</th>
+                            <th>Representación</th>
+                            <th>Variables Principales</th>
+                            <th>Aplicaciones</th>
+                            <th>Herramienta Matemática</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Coordenadas Polares</strong></td>
+                            <td>\((r, \theta)\)</td>
+                            <td>Radio y ángulo polar</td>
+                            <td>Posiciones radiales, órbitas, antenas, campos simétricos</td>
+                            <td>Conversión polar-cartesiana</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ecuaciones Paramétricas</strong></td>
+                            <td>\(x = f(t), y = g(t)\)</td>
+                            <td>Parámetro \(t\) y coordenadas</td>
+                            <td>Trayectorias físicas, cinemática, animación gráfica</td>
+                            <td>Eliminación del parámetro</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vectores</strong></td>
+                            <td>\(\vec{v} = \langle a, b \rangle\)</td>
+                            <td>Componentes cartesianas</td>
+                            <td>Fuerzas, velocidades, desplazamientos, estática</td>
+                            <td>Álgebra vectorial y producto punto</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Simulador 1: Coordenadas Polares -->
+            <div class="simulator-card">
+                <h3>Simulador Interactivo: Coordenadas Polares</h3>
+                <p>Experimenta convirtiendo y visualizando puntos y curvas polares en tiempo real.</p>
+                <div class="sim-grid">
+                    <div class="controls-group">
+                        <div class="control-item">
+                            <label for="polar-r">Radio (\(r\)): <span id="val-r">4</span></label>
+                            <input type="range" id="polar-r" min="-6" max="6" step="0.5" value="4">
+                        </div>
+                        <div class="control-item">
+                            <label for="polar-theta">Ángulo (\(\theta\)): <span id="val-theta">60</span>°</label>
+                            <input type="range" id="polar-theta" min="-360" max="360" step="5" value="60">
+                        </div>
+                        <div class="control-item">
+                            <label for="polar-curve">Curva Polar Especial:</label>
+                            <select id="polar-curve">
+                                <option value="point">Punto Individual</option>
+                                <option value="circle">Circunferencia (\(r = 3\))</option>
+                                <option value="cardioid">Cardioide (\(r = 2(1 + \cos\theta)\))</option>
+                                <option value="rose">Rosa Polar (\(r = 4\cos(3\theta)\))</option>
+                                <option value="spiral">Espiral de Arquímedes (\(r = 0.5\theta\))</option>
+                            </select>
+                        </div>
+                        <div class="sim-output" id="polar-output">
+                            Cargando datos...
+                        </div>
+                    </div>
+                    <div>
+                        <canvas id="canvas-polar" width="400" height="350"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simulador 2: Ecuaciones Paramétricas -->
+            <div class="simulator-card">
+                <h3>Simulador Interactivo: Ecuaciones Paramétricas</h3>
+                <p>Visualiza cómo el parámetro genera trayectorias en el plano y anima su recorrido.</p>
+                <div class="sim-grid">
+                    <div class="controls-group">
+                        <div class="control-item">
+                            <label for="param-model">Modelo de Trayectoria:</label>
+                            <select id="param-model">
+                                <option value="line">Recta: \(x = t, y = 2t - 1\)</option>
+                                <option value="circle" selected>Circunferencia: \(x = 3\cos(t), y = 3\sen(t)\)</option>
+                                <option value="parabola">Parábola: \(x = t, y = t^2 - 3\)</option>
+                                <option value="lissajous">Curva de Lissajous: \(x = 3\sin(2t), y = 3\sin(3t)\)</option>
+                            </select>
+                        </div>
+                        <div class="control-item">
+                            <label for="param-t">Parámetro (\(t\)): <span id="val-t">0.00</span></label>
+                            <input type="range" id="param-t" min="0" max="6.28" step="0.05" value="0">
+                        </div>
+                        <div class="btn-group">
+                            <button id="btn-play">Reproducir Animación</button>
+                            <button id="btn-reset" class="secondary">Reiniciar</button>
+                        </div>
+                        <div class="sim-output" id="param-output">
+                            Posición actual: x = 3.00, y = 0.00
+                        </div>
+                    </div>
+                    <div>
+                        <canvas id="canvas-param" width="400" height="350"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simulador 3: Vectores -->
+            <div class="simulator-card">
+                <h3>Simulador Interactivo: Vectores en 2D</h3>
+                <p>Modifica las componentes de dos vectores para calcular sus operaciones fundamentales.</p>
+                <div class="sim-grid">
+                    <div class="controls-group">
+                        <div class="control-item">
+                            <label>Vector \(\vec{u} = \langle u_1, u_2 \rangle\):</label>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="number" id="u1" value="3" style="width: 50%;">
+                                <input type="number" id="u2" value="4" style="width: 50%;">
+                            </div>
+                        </div>
+                        <div class="control-item">
+                            <label>Vector \(\vec{v} = \langle v_1, v_2 \rangle\):</label>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="number" id="v1" value="-2" style="width: 50%;">
+                                <input type="number" id="v2" value="5" style="width: 50%;">
+                            </div>
+                        </div>
+                        <div class="sim-output" id="vector-output">
+                            Cálculos vectoriales...
+                        </div>
+                    </div>
+                    <div>
+                        <canvas id="canvas-vector" width="400" height="350"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3 -->
+        <section id="ejercicios">
+            <h2>3. Ejercicios Prácticos Resueltos y Práctica Interactiva</h2>
+            <p>Analiza detalladamente cada ejercicio resuelto paso a paso y luego pon a prueba tus conocimientos en la sección interactiva.</p>
+
+            <h3>A. Ejercicios de Coordenadas Polares</h3>
+            <div class="exercise-box">
+                <h4>Ejercicio 1: Conversión de polar a cartesiano</h4>
+                <p><strong>Enunciado:</strong> Convierte el punto polar \(P = (4, 60^\circ)\) a coordenadas cartesianas.</p>
+                <div class="solution-toggle">
+                    <button class="secondary" onclick="toggleSolution('sol-1')">Ver Solución Paso a Paso</button>
+                    <div id="sol-1" class="solution-content">
+                        <p><strong>1. Datos:</strong> \(r = 4\), \(\theta = 60^\circ = \frac{\pi}{3}\) rad.</p>
+                        <p><strong>2. Fórmulas:</strong> \(x = r \cos(\theta)\), \(y = r \sen(\theta)\).</p>
+                        <p><strong>3. Sustitución y desarrollo:</strong></p>
+                        <p>\(x = 4 \cos(60^\circ) = 4 \left(\frac{1}{2}\right) = 2\)</p>
+                        <p>\(y = 4 \sen(60^\circ) = 4 \left(\frac{\sqrt{3}}{2}\right) = 2\sqrt{3} \approx 3.46\)</p>
+                        <p><strong>4. Resultado final:</strong> El punto en coordenadas cartesianas es \((2, 2\sqrt{3})\).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Ejercicio 2: Conversión de cartesiano a polar</h4>
+                <p><strong>Enunciado:</strong> Convierte el punto cartesiano \(P = (-3, 3)\) a coordenadas polares.</p>
+                <div class="solution-toggle">
+                    <button class="secondary" onclick="toggleSolution('sol-2')">Ver Solución Paso a Paso</button>
+                    <div id="sol-2" class="solution-content">
+                        <p><strong>1. Datos:</strong> \(x = -3\), \(y = 3\).</p>
+                        <p><strong>2. Cálculo del radio \(r\):</strong></p>
+                        <p>\(r = \sqrt{(-3)^2 + 3^2} = \sqrt{9 + 9} = \sqrt{18} = 3\sqrt{2}\)</p>
+                        <p><strong>3. Cálculo del ángulo \(\theta\):</strong></p>
+                        <p>\(\tan(\theta) = \frac{3}{-3} = -1\). Como \(x < 0\) y \(y > 0\), el punto se encuentra en el <strong>segundo cuadrante</strong>.</p>
+                        <p>\(\theta = 180^\circ - 45^\circ = 135^\circ\) (o \(\frac{3\pi}{4}\) rad).</p>
+                        <p><strong>4. Resultado final:</strong> \((3\sqrt{2}, 135^\circ)\).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Ejercicio 3: Representación de una curva polar</h4>
+                <p><strong>Enunciado:</strong> Analiza la ecuación polar \(r = 2\).</p>
+                <div class="solution-toggle">
+                    <button class="secondary" onclick="toggleSolution('sol-3')">Ver Solución Paso a Paso</button>
+                    <div id="sol-3" class="solution-content">
+                        <p><strong>1. Análisis:</strong> La ecuación establece que para cualquier ángulo \(\theta\), el radio vector es constante e igual a 2.</p>
+                        <p><strong>2. Interpretación geométrica:</strong> Todos los puntos están a una distancia fija de 2 unidades del origen, lo que define una circunferencia con centro en el polo.</p>
+                        <p><strong>3. Comprobación cartesiana:</strong> Elevando al cuadrado o usando \(r^2 = x^2 + y^2\), obtenemos \(2^2 = x^2 + y^2 \implies x^2 + y^2 = 4\).</p>
+                        <p><strong>4. Resultado final:</strong> Es una circunferencia de radio \(R = 2\) centrada en el origen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>B. Ejercicios de Ecuaciones Paramétricas</h3>
+            <div class="exercise-box">
+                <h4>Ejercicio 4: Eliminación del parámetro</h4>
+                <p><strong>Enunciado:</strong> Dadas las ecuaciones \(x = t + 1\) y \(y = 2t - 3\), obtén la ecuación cartesiana.</p>
+                <div class="solution-toggle">
+                    <button class="secondary" onclick="toggleSolution('sol-4')">Ver Solución Paso a Paso</button>
+                    <div id="sol-4" class="solution-content">
+                        <p><strong>1. Despejar el parámetro \(t\) de la primera ecuación:</strong></p>
+                        <p>\(t = x - 1\)</p>
+                        <p><strong>2. Sustituir en la segunda ecuación:</strong></p>
+                        <p>\(y = 2(x - 1) - 3\)</p>
+                        <p><strong>3. Desarrollar algebraicamente:</strong></p>
+                        <p>\(y = 2x - 2 - 3 \implies y = 2x - 5\)</p>
+                        <p><strong>4. Resultado final:</strong> Es la ecuación cartesiana de una recta con pendiente 2 y ordenada al origen -5.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Ejercicio 5: Circunferencia parametrizada</h4>
+                <p><strong>Enunciado:</strong> Analiza \(x = 3\cos(t), \ y = 3\sen(t)\) eliminando el parámetro.</p>
+                <div class="solution-toggle">
+                    <button class="secondary" onclick="toggleSolution('sol-5')">Ver Solución Paso a Paso</button>
+                    <div id="sol-5" class="solution-content">
+                        <p><strong>1. Aislar las funciones trigonométricas:</strong></p>
+                        <p>\(\cos(t) = \frac{x}{3}, \quad \sen(t) = \frac{y}{3}\)</p>
+                        <p><strong>2. Aplicar la identidad trigonométrica fundamental (\(\cos^2(t) + \sen^2(t) = 1\)):</strong></p>
+                        <p>\(\left(\frac{x}{3}\right)^2 + \left(\frac{y}{3}\right)^2 = 1 \implies \frac{x^2}{9} + \frac{y^2}{9} = 1\)</p>
+                        <p><strong>3. Resultado final:</strong> \(x^2 + y^2 = 9\), que representa una circunferencia centrada en el origen con radio \(r = 3\), recorrida en el intervalo \(t \in [0, 2\pi]\).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Ejercicio 6: Trayectoria parabólica</h4>
+                <p><strong>Enunciado:</strong> Dadas \(x = t, \ y = t^2 - 2\), elimina el parámetro y describe el movimiento.</p>
+                <div class="solution-toggle">
+                    <button class="secondary" onclick="toggleSolution('sol-6')">Ver Solución Paso a Paso</button>
+                    <div id="sol-6" class="solution-content">
+                        <p><strong>1. Sustitución directa:</strong> Como \(x = t\), sustituimos directamente en \(y\).</p>
+                        <p>\(y = x^2 - 2\)</p>
+                        <p><strong>2. Descripción:</strong> Al aumentar \(t\), el punto avanza de izquierda a derecha sobre una parábola vertical con vértice en \((0, -2)\).</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>C. Ejercicios de Vectores</h3>
+            <div class="exercise-box">
+                <h4>Ejercicio 7: Magnitud de un vector</h4>
+                <p><strong>Enunciado:</strong> Calcula la magnitud de \(\vec{v} = \langle 6, 8 \rangle\).</p>
+                <div class="solution-toggle">
+                    <button class="secondary" onclick="toggleSolution('sol-7')">Ver Solución Paso a Paso</button>
+                    <div id="sol-7" class="solution-content">
+                        <p><strong>1. Fórmula:</strong> \(|\vec{v}| = \sqrt{a^2 + b^2}\)</p>
+                        <p><strong>2. Sustitución:</strong> \(|\vec{v}| = \sqrt{6^2 + 8^2} = \sqrt{36 + 64} = \sqrt{100} = 10\).</p>
+                        <p><strong>3. Resultado final:</strong> La magnitud es 10 unidades.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Ejercicio 8: Operaciones con vectores</h4>
+                <p><strong>Enunciado:</strong> Dados \(\vec{u} = \langle 2, 3 \rangle\) y \(\vec{v} = \langle 4, -1 \rangle\), calcula suma, resta y producto punto.</p>
+                <div class="solution-toggle">
+                    <button class="secondary" onclick="toggleSolution('sol-8')">Ver Solución Paso a Paso</button>
+                    <div id="sol-8" class="solution-content">
+                        <p><strong>1. Suma:</strong> \(\vec{u} + \vec{v} = \langle 2+4, 3+(-1) \rangle = \langle 6, 2 \rangle\)</p>
+                        <p><strong>2. Resta:</strong> \(\vec{u} - \vec{v} = \langle 2-4, 3-(-1) \rangle = \langle -2, 4 \rangle\)</p>
+                        <p><strong>3. Producto punto:</strong> \(\vec{u} \cdot \vec{v} = (2)(4) + (3)(-1) = 8 - 3 = 5\)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Ejercicio 9: Ángulo entre vectores</h4>
+                <p><strong>Enunciado:</strong> Calcula el ángulo entre \(\vec{u} = \langle 1, 0 \rangle\) y \(\vec{v} = \langle 1, 1 \rangle\).</p>
+                <div class="solution-toggle">
+                    <button class="secondary" onclick="toggleSolution('sol-9')">Ver Solución Paso a Paso</button>
+                    <div id="sol-9" class="solution-content">
+                        <p><strong>1. Magnitudes:</strong> \(|\vec{u}| = 1\), \(|\vec{v}| = \sqrt{1^2+1^2} = \sqrt{2}\).</p>
+                        <p><strong>2. Producto punto:</strong> \(\vec{u} \cdot \vec{v} = (1)(1) + (0)(1) = 1\).</p>
+                        <p><strong>3. Fórmula del coseno:</strong> \(\cos(\theta) = \frac{1}{(1)(\sqrt{2})} = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}\).</p>
+                        <p><strong>4. Resultado:</strong> \(\theta = 45^\circ\) (\(\frac{\pi}{4}\) rad).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h4>Ejercicio 10: Aplicación práctica de vectores</h4>
+                <p><strong>Enunciado:</strong> Una persona camina 3 unidades al este y 4 al norte. Representa el desplazamiento, halla su magnitud y dirección.</p>
+                <div class="solution-toggle">
+                    <button class="secondary" onclick="toggleSolution('sol-10')">Ver Solución Paso a Paso</button>
+                    <div id="sol-10" class="solution-content">
+                        <p><strong>1. Vector desplazamiento:</strong> \(\vec{d} = \langle 3, 4 \rangle\).</p>
+                        <p><strong>2. Magnitud:</strong> \(|\vec{d}| = \sqrt{3^2 + 4^2} = 5\).</p>
+                        <p><strong>3. Dirección:</strong> \(\theta = \arctan\left(\frac{4}{3}\right) \approx 53.13^\circ\).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Práctica Interactiva (Quiz) -->
+            <h3 style="margin-top: 3rem;">Práctica Interactiva de Autoevaluación</h3>
+            
+            <div class="quiz-container">
+                <h4>Pregunta 1: ¿Cuál es la conversión cartesiana del punto polar \((2, 90^\circ)\)?</h4>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkQuiz(1, 'a', this)">a) \((2, 0)\)</div>
+                    <div class="quiz-option" onclick="checkQuiz(1, 'b', this)">b) \((0, 2)\)</div>
+                    <div class="quiz-option" onclick="checkQuiz(1, 'c', this)">c) \((-2, 0)\)</div>
+                </div>
+                <div id="feedback-1" class="feedback"></div>
+            </div>
+
+            <div class="quiz-container">
+                <h4>Pregunta 2: Si el producto punto entre dos vectores no nulos es cero, ¿cómo son los vectores?</h4>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkQuiz(2, 'a', this)">a) Paralelos</div>
+                    <div class="quiz-option" onclick="checkQuiz(2, 'b', this)">b) Iguales</div>
+                    <div class="quiz-option" onclick="checkQuiz(2, 'c', this)">c) Perpendiculares (ortogonales)</div>
+                </div>
+                <div id="feedback-2" class="feedback"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4 -->
+        <section id="conclusiones">
+            <h2>4. Conclusiones y Bibliografía Académica</h2>
+            <p>El dominio conjunto de las <strong>coordenadas polares</strong>, las <strong>ecuaciones paramétricas</strong> y los <strong>vectores</strong> otorga al estudiante una flexibilidad analítica superior en el precálculo:</p>
+            <ul>
+                <li><strong>Coordenadas polares:</strong> Facilitan la modelación de fenómenos con simetría radial o circular (como campos electromagnéticos, ondas y órbitas planetarias) simplificando ecuaciones que en coordenadas cartesianas serían sumamente complejas.</li>
+                <li><strong>Ecuaciones paramétricas:</strong> Permiten descomponer el movimiento y las trayectorias complejas respecto a una variable temporal o geométrica auxiliar, siendo fundamentales en física y cálculo vectorial.</li>
+                <li><strong>Vectores:</strong> Proveen el lenguaje algebraico y geométrico idóneo para operar con magnitudes orientadas, modelando fuerzas, velocidades y aceleraciones en el espacio físico.</li>
+            </ul>
+
+            <p><strong>Recomendaciones de estudio:</strong></p>
+            <ol>
+                <li><strong>Visualiza siempre:</strong> Realiza un boceto gráfico antes de operar algebraicamete.</li>
+                <li><strong>Verifica cuadrantes:</strong> Al convertir coordenadas cartesianas a polares, corrobora siempre el cuadrante analizando los signos de \(x\) e \(y\).</li>
+                <li><strong>Distingue roles:</strong> No confundas el parámetro \(t\) con las coordenadas espaciales \(x\) e \(y\).</li>
+                <li><strong>Domina identidades:</strong> Ten siempre presentes las identidades trigonométricas fundamentales para eliminar parámetros y simplificar expresiones polares.</li>
+            </ol>
+
+            <h3 style="margin-top: 2rem;">Bibliografía Académica Verificada</h3>
+            <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                <li>OpenStax. (2022). <em>Precalculus 2e</em>. OpenStax CNX. <a href="https://openstax.org/details/books/precalculus-2e" target="_blank">https://openstax.org/details/books/precalculus-2e</a></li>
+                <li>OpenStax. (2021). <em>Calculus Volume 1</em>. OpenStax CNX. <a href="https://openstax.org/details/books/calculus-volume-1" target="_blank">https://openstax.org/details/books/calculus-volume-1</a></li>
+                <li>Stewart, J., Redlin, L., & Watson, S. (2015). <em>Precalculus: Mathematics for Calculus</em> (7th ed.). Cengage Learning.</li>
+            </ul>
+            <div class="footer-action">
+                <a href="/index.html" class="btn-return-footer">← Go Back</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Derechos reservados Monte Verde Bilingual School &copy; 2026</p>
+    </footer>
+
+    <!-- JavaScript interactivo -->
+    <script>
+        // Función para alternar soluciones de ejercicios
+        function toggleSolution(id) {
+            const el = document.getElementById(id);
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
+            } else {
+                el.style.display = 'block';
+            }
+        }
+
+        // Quiz checker
+        function checkQuiz(qNum, option, elem) {
+            const feedback = document.getElementById(`feedback-${qNum}`);
+            const options = elem.parentNode.children;
+            for (let opt of options) {
+                opt.style.background = 'white';
+            }
+            
+            if (qNum === 1) {
+                if (option === 'b') {
+                    elem.style.background = '#d1fae5';
+                    feedback.style.color = 'var(--success)';
+                    feedback.textContent = '¡Correcto! r=2 y \theta=90^\circ implica x = 2\cos(90^\circ)=0, y = 2\sen(90^\circ)=2 \implies (0,2).';
+                } else {
+                    elem.style.background = '#fee2e2';
+                    feedback.style.color = 'var(--error)';
+                    feedback.textContent = 'Incorrecto. Recuerda que \cos(90^\circ)=0 y \sen(90^\circ)=1.';
+                }
+            } else if (qNum === 2) {
+                if (option === 'c') {
+                    elem.style.background = '#d1fae5';
+                    feedback.style.color = 'var(--success)';
+                    feedback.textContent = '¡Correcto! Si el producto punto es cero, el coseno del ángulo es cero, lo que indica que son perpendiculares.';
+                } else {
+                    elem.style.background = '#fee2e2';
+                    feedback.style.color = 'var(--error)';
+                    feedback.textContent = 'Incorrecto. Un producto punto igual a cero caracteriza a los vectores ortogonales o perpendiculares.';
+                }
+            }
+        }
+
+        // --- Simulador 1: Coordenadas Polares ---
+        const canvasPolar = document.getElementById('canvas-polar');
+        const ctxPolar = canvasPolar.getContext('2d');
+        const rInput = document.getElementById('polar-r');
+        const thetaInput = document.getElementById('polar-theta');
+        const curveSelect = document.getElementById('polar-curve');
+        const polarOutput = document.getElementById('polar-output');
+
+        function drawPolarGrid(ctx, cx, cy) {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 1;
+
+            // Círculos concéntricos
+            for (let r = 50; r <= 150; r += 50) {
+                ctx.beginPath();
+                ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+                ctx.stroke();
+            }
+
+            // Ejes cartesianos de referencia
+            ctx.beginPath();
+            ctx.moveTo(0, cy); ctx.lineTo(ctx.canvas.width, cy);
+            ctx.moveTo(cx, 0); ctx.lineTo(cx, ctx.canvas.height);
+            ctx.stroke();
+        }
+
+        function updatePolarSim() {
+            const r = parseFloat(rInput.value);
+            const deg = parseFloat(thetaInput.value);
+            const rad = deg * Math.PI / 180;
+            const curve = curveSelect.value;
+
+            document.getElementById('val-r').textContent = r;
+            document.getElementById('val-theta').textContent = deg;
+
+            const cx = canvasPolar.width / 2;
+            const cy = canvasPolar.height / 2;
+            const scale = 25; // píxeles por unidad
+
+            drawPolarGrid(ctxPolar, cx, cy);
+
+            if (curve === 'point') {
+                const x = r * Math.cos(rad);
+                const y = r * Math.sin(rad);
+                const px = cx + x * scale;
+                const py = cy - y * scale; // Invertir eje Y
+
+                // Dibujar línea radial
+                ctxPolar.strokeStyle = 'var(--primary)';
+                ctxPolar.lineWidth = 2;
+                ctxPolar.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(px, py);
+                ctx.stroke();
+
+                // Dibujar punto
+                ctxPolar.fillStyle = 'var(--accent)';
+                ctxPolar.beginPath();
+                ctxPolar.arc(px, py, 6, 0, 2 * Math.PI);
+                ctxPolar.fill();
+
+                polarOutput.innerHTML = `Punto Polar: (r=${r}, θ=${deg}°)<br>Cartesiano Equivalente:<br>x = ${x.toFixed(2)}, y = ${y.toFixed(2)}`;
+            } else {
+                ctxPolar.strokeStyle = 'var(--primary)';
+                ctxPolar.lineWidth = 2;
+                ctxPolar.beginPath();
+
+                for (let a = 0; a <= 2 * Math.PI; a += 0.02) {
+                    let currR = 0;
+                    if (curve === 'circle') currR = 3;
+                    else if (curve === 'cardioid') currR = 2 * (1 + Math.cos(a));
+                    else if (curve === 'rose') currR = 4 * Math.cos(3 * a);
+                    else if (curve === 'spiral') currR = 0.5 * a;
+
+                    const x = currR * Math.cos(a);
+                    const y = currR * Math.sin(a);
+                    const px = cx + x * scale;
+                    const py = cy - y * scale;
+
+                    if (a === 0) ctxPolar.moveTo(px, py);
+                    else ctxPolar.lineTo(px, py);
+                }
+                ctxPolar.stroke();
+                polarOutput.innerHTML = `Visualizando curva polar seleccionada.<br>Ecuación activa según modelo.`;
+            }
+        }
+
+        rInput.addEventListener('input', updatePolarSim);
+        thetaInput.addEventListener('input', updatePolarSim);
+        curveSelect.addEventListener('change', updatePolarSim);
+
+        // --- Simulador 2: Ecuaciones Paramétricas ---
+        const canvasParam = document.getElementById('canvas-param');
+        const ctxParam = canvasParam.getContext('2d');
+        const paramModel = document.getElementById('param-model');
+        const paramT = document.getElementById('param-t');
+        const btnPlay = document.getElementById('btn-play');
+        const btnReset = document.getElementById('btn-reset');
+        const paramOutput = document.getElementById('param-output');
+
+        let animInterval = null;
+
+        function getParamEquations(model, t) {
+            let x = 0, y = 0;
+            if (model === 'line') {
+                x = t - 3;
+                y = 2 * (t - 3) - 1;
+            } else if (model === 'circle') {
+                x = 3 * Math.cos(t);
+                y = 3 * Math.sin(t);
+            } else if (model === 'parabola') {
+                x = t - 3;
+                y = Math.pow(t - 3, 2) - 3;
+            } else if (model === 'lissajous') {
+                x = 3 * Math.sin(2 * t);
+                y = 3 * Math.sin(3 * t);
+            }
+            return { x, y };
+        }
+
+        function updateParamSim() {
+            const model = paramModel.value;
+            const t = parseFloat(paramT.value);
+            document.getElementById('val-t').textContent = t.toFixed(2);
+
+            const cx = canvasParam.width / 2;
+            const cy = canvasParam.height / 2;
+            const scale = 40;
+
+            // Limpiar canvas
+            ctxParam.clearRect(0, 0, canvasParam.width, canvasParam.height);
+            ctxParam.strokeStyle = '#e2e8f0';
+            ctxParam.lineWidth = 1;
+            ctxParam.beginPath();
+            ctxParam.moveTo(0, cy); ctxParam.lineTo(canvasParam.width, cy);
+            ctxParam.moveTo(cx, 0); ctxParam.lineTo(cx, canvasParam.height);
+            ctxParam.stroke();
+
+            // Dibujar trayectoria completa
+            ctxParam.strokeStyle = '#cbd5e1';
+            ctxParam.lineWidth = 2;
+            ctxParam.beginPath();
+            let tMax = (model === 'line' || model === 'parabola') ? 6 : 2 * Math.PI;
+            paramT.max = tMax;
+
+            for (let currentT = 0; currentT <= tMax; currentT += 0.05) {
+                const pt = getParamEquations(model, currentT);
+                const px = cx + pt.x * scale;
+                const py = cy - pt.y * scale;
+                if (currentT === 0) ctxParam.moveTo(px, py);
+                else ctxParam.lineTo(px, py);
+            }
+            ctxParam.stroke();
+
+            // Punto actual
+            const currentPt = getParamEquations(model, t);
+            const cpx = cx + currentPt.x * scale;
+            const cpy = cy - currentPt.y * scale;
+
+            ctxParam.fillStyle = 'var(--primary)';
+            ctxParam.beginPath();
+            ctxParam.arc(cpx, cpy, 7, 0, 2 * Math.PI);
+            ctxParam.fill();
+
+            paramOutput.innerHTML = `Parámetro t = ${t.toFixed(2)}<br>x(t) = ${currentPt.x.toFixed(2)}<br>y(t) = ${currentPt.y.toFixed(2)}`;
+        }
+
+        paramModel.addEventListener('change', () => {
+            paramT.value = 0;
+            updateParamSim();
+        });
+        paramT.addEventListener('input', updateParamSim);
+
+        btnPlay.addEventListener('click', () => {
+            if (animInterval) {
+                clearInterval(animInterval);
+                animInterval = null;
+                btnPlay.textContent = 'Reproducir Animación';
+                return;
+            }
+            btnPlay.textContent = 'Pausar';
+            animInterval = setInterval(() => {
+                let val = parseFloat(paramT.value);
+                let max = parseFloat(paramT.max);
+                val += 0.05;
+                if (val > max) val = 0;
+                paramT.value = val;
+                updateParamSim();
+            }, 50);
+        });
+
+        btnReset.addEventListener('click', () => {
+            if (animInterval) {
+                clearInterval(animInterval);
+                animInterval = null;
+                btnPlay.textContent = 'Reproducir Animación';
+            }
+            paramT.value = 0;
+            updateParamSim();
+        });
+
+        // --- Simulador 3: Vectores ---
+        const canvasVector = document.getElementById('canvas-vector');
+        const ctxVector = canvasVector.getContext('2d');
+        const u1Input = document.getElementById('u1');
+        const u2Input = document.getElementById('u2');
+        const v1Input = document.getElementById('v1');
+        const v2Input = document.getElementById('v2');
+        const vectorOutput = document.getElementById('vector-output');
+
+        function drawArrow(ctx, fromX, fromY, toX, toY, color) {
+            const headLength = 10;
+            const angle = Math.atan2(toY - fromY, toX - fromX);
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = 2;
+
+            ctx.beginPath();
+            ctx.moveTo(fromX, fromY);
+            ctx.lineTo(toX, toY);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(toX, toY);
+            ctx.lineTo(toX - headLength * Math.cos(angle - Math.PI / 6), toY - headLength * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(toX - headLength * Math.cos(angle + Math.PI / 6), toY - headLength * Math.sin(angle + Math.PI / 6));
+            ctx.lineTo(toX, toY);
+            ctx.fill();
+        }
+
+        function updateVectorSim() {
+            const u1 = parseFloat(u1Input.value) || 0;
+            const u2 = parseFloat(u2Input.value) || 0;
+            const v1 = parseFloat(v1Input.value) || 0;
+            const v2 = parseFloat(v2Input.value) || 0;
+
+            const cx = canvasVector.width / 2;
+            const cy = canvasVector.height / 2;
+            const scale = 25;
+
+            ctxVector.clearRect(0, 0, canvasVector.width, canvasVector.height);
+            ctxVector.strokeStyle = '#e2e8f0';
+            ctxVector.lineWidth = 1;
+            ctxVector.beginPath();
+            ctxVector.moveTo(0, cy); ctxVector.lineTo(canvasVector.width, cy);
+            ctxVector.moveTo(cx, 0); ctxVector.lineTo(cx, canvasVector.height);
+            ctxVector.stroke();
+
+            // Dibujar u (Azul)
+            drawArrow(ctxVector, cx, cy, cx + u1 * scale, cy - u2 * scale, 'var(--primary)');
+            // Dibujar v (Naranja/Rojo)
+            drawArrow(ctxVector, cx, cy, cx + v1 * scale, cy - v2 * scale, '#f97316');
+
+            // Cálculos
+            const magU = Math.sqrt(u1*u1 + u2*u2);
+            const magV = Math.sqrt(v1*v1 + v2*v2);
+            const dotProduct = u1*v1 + u2*v2;
+            let angleDeg = 0;
+            if (magU > 0 && magV > 0) {
+                let cosTheta = dotProduct / (magU * magV);
+                cosTheta = Math.max(-1, Math.min(1, cosTheta));
+                angleDeg = Math.acos(cosTheta) * (180 / Math.PI);
+            }
+            const isPerp = Math.abs(dotProduct) < 1e-5;
+
+            vectorOutput.innerHTML = `|u| = ${magU.toFixed(2)}, |v| = ${magV.toFixed(2)}<br>` +
+                `u · v = ${dotProduct.toFixed(2)}<br>` +
+                `Ángulo: ${angleDeg.toFixed(1)}°<br>` +
+                `¿Perpendiculares?: ${isPerp ? 'SÍ (Ortogonales)' : 'NO'}`;
+        }
+
+        [u1Input, u2Input, v1Input, v2Input].forEach(input => {
+            input.addEventListener('input', updateVectorSim);
+        });
+
+        // Inicializar simuladores al cargar
+        window.addEventListener('load', () => {
+            updatePolarSim();
+            updateParamSim();
+            updateVectorSim();
+        });
+    </script>
+</body>
+</html>
